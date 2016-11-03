@@ -11,6 +11,7 @@ import Foundation
 enum ManagerType: ParkEntrant {
     case manager
 }
+
 extension ManagerType {
   var discounts: (food: DiscountType, merchandise: DiscountType)? {
     return (.food(25), .merchandise(25))
