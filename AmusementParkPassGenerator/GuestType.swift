@@ -11,10 +11,11 @@ import Foundation
 enum GuestType: ParkEntrant {
   case classic
   case VIP
-  case freeChild(AgeVerified)
+  case freeChild(birthdate: String)
 }
 
 extension GuestType {
+  
   var discounts: (food: DiscountType, merchandise: DiscountType)? {
     switch self {
     case .VIP: return (.food(10), .merchandise(20))

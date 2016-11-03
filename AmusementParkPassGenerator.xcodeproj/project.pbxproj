@@ -23,6 +23,7 @@
 		27F84F7A1DCBA53A000B4D52 /* PassType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F84F791DCBA53A000B4D52 /* PassType.swift */; };
 		27F84F7C1DCBA781000B4D52 /* AccessPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F84F7B1DCBA781000B4D52 /* AccessPass.swift */; };
 		27F84F7E1DCBA9FE000B4D52 /* ContactInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F84F7D1DCBA9FE000B4D52 /* ContactInformation.swift */; };
+		27F84F801DCBC3B1000B4D52 /* AccessPassGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F84F7F1DCBC3B1000B4D52 /* AccessPassGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		27F84F791DCBA53A000B4D52 /* PassType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassType.swift; sourceTree = "<group>"; };
 		27F84F7B1DCBA781000B4D52 /* AccessPass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessPass.swift; sourceTree = "<group>"; };
 		27F84F7D1DCBA9FE000B4D52 /* ContactInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInformation.swift; sourceTree = "<group>"; };
+		27F84F7F1DCBC3B1000B4D52 /* AccessPassGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessPassGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				27F84F751DCB8F0D000B4D52 /* AccessPassError.swift */,
 				27F84F7B1DCBA781000B4D52 /* AccessPass.swift */,
 				27F84F7D1DCBA9FE000B4D52 /* ContactInformation.swift */,
+				27F84F7F1DCBC3B1000B4D52 /* AccessPassGenerator.swift */,
 			);
 			name = ConcreteTypes;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				27F84F741DCB8EE6000B4D52 /* ManagerType.swift in Sources */,
 				27F84F721DCB8EC6000B4D52 /* GuestType.swift in Sources */,
 				27F84F581DCB8D7D000B4D52 /* ViewController.swift in Sources */,
+				27F84F801DCBC3B1000B4D52 /* AccessPassGenerator.swift in Sources */,
 				27F84F7C1DCBA781000B4D52 /* AccessPass.swift in Sources */,
 				27F84F7A1DCBA53A000B4D52 /* PassType.swift in Sources */,
 				27F84F681DCB8DA4000B4D52 /* ParkEntrant.swift in Sources */,

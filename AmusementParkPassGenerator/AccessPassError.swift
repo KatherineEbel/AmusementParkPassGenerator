@@ -9,6 +9,6 @@
 import Foundation
 
 enum AccessPassError: Error {
-  case NoContactInfoProvided
   case InvalidContactInfoProvided
+  case InvalidDateFormat
 }
