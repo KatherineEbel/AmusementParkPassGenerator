@@ -20,13 +20,20 @@ struct ContactInformation {
 
 extension ContactInformation {
   init?(withDictionary info: [String: String]) {
-    if let firstName = info["firstName"], let lastName = info["lastName"],
-      let streetAddress = info["streetAddress"], let city = info["city"],
-      let state = info["state"], let zipCode = info["zipCode"] {
-      self.init(firstName: firstName, lastName: lastName, streetAddress: streetAddress,
-                city: city, state: state, zipCode: zipCode)
-    } else {
+    do {
+      if let firstName = info["firstName"], let lastName = info["lastName"],
+        let streetAddress = info["streetAddress"], let city = info["city"],
+        let state = info["state"], let zipCode = info["zipCode"] {
+        self.init(firstName: firstName, lastName: lastName, streetAddress: streetAddress,
+                  city: city, state: state, zipCode: zipCode)
+      } else {
+        throw AccessPassError.InvalidContactInfoProvided
+      }
+    } catch AccessPassError.InvalidContactInfoProvided {
+      print("Please double check that all required information is provided")
       return nil
+    } catch let error {
+      fatalError("\(error)")
     }
   }
 }

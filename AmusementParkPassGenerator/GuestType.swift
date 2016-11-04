@@ -8,6 +8,9 @@
 
 import Foundation
 
+private let vipFoodDiscount: Percent = 10
+private let vipMerchandiseDicount: Percent = 20
+
 enum GuestType: ParkEntrant, AgeVerifiable {
   case classic
   case VIP
@@ -16,8 +19,8 @@ enum GuestType: ParkEntrant, AgeVerifiable {
 
 extension GuestType {
   var discounts: (food: Percent, merchandise: Percent) {
-    let foodDiscount = DiscountType.food(10).discount
-    let merchandiseDiscount = DiscountType.merchandise(15).discount
+    let foodDiscount = DiscountType.food(vipFoodDiscount).discount
+    let merchandiseDiscount = DiscountType.merchandise(vipMerchandiseDicount).discount
     switch self {
     case .VIP: return (foodDiscount, merchandiseDiscount)
     default:

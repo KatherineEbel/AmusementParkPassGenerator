@@ -12,16 +12,19 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    let passGenerator = AccessPassGenerator.passGenerator
+    //let incorrectInfo = ["firstName": "Kathy", "lastName": "Ebel"]
     let info = ["firstName": "Kathy", "lastName": "Ebel", "streetAddress": "201 Pioneer Trail",
                 "city": "Green Cove Springs", "state": "FL", "zipCode": "32043"]
-    if let contactInfo: ContactInformation = ContactInformation(withDictionary: info) {
-      let child = GuestType.freeChild(birthdate: "2014-10-09")
-      let childPass = AccessPass(type: child)
-      let verified = childPass.isVerified
-      print(verified)
-      print(childPass.allRideAccess)
-    }
+    // let badInfo = ContactInformation(withDictionary: incorrectInfo)
+    // let invalidBirthdate = "2009-10-07"
+    let contactInfo = ContactInformation(withDictionary: info)!
+    let employee = HourlyEmployeeType.rideServices(contactInfo)
+    let employeePass = passGenerator.createPass(forEntrant: employee)
+    print(employeePass.foodDiscount)
+    let hourly = employee.contactInformation
+    print(hourly)
+  
   }
 
   override func didReceiveMemoryWarning() {

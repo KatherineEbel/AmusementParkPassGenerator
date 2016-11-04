@@ -8,6 +8,10 @@
 
 import Foundation
 
+
+private let employeeFoodDiscount: Percent = 15
+private let employeeMerchandiseDicount: Percent = 25
+
 enum HourlyEmployeeType: ParkEntrant, Contactable {
   case foodServices(ContactInformation)
   case rideServices(ContactInformation)
@@ -24,8 +28,8 @@ extension HourlyEmployeeType {
   }
   
   var discounts: (food: Percent, merchandise: Percent) {
-    let foodDiscount = DiscountType.food(20).discount
-    let merchandiseDiscount = DiscountType.merchandise(20).discount
+    let foodDiscount = DiscountType.food(employeeFoodDiscount).discount
+    let merchandiseDiscount = DiscountType.merchandise(employeeMerchandiseDicount).discount
     return (foodDiscount, merchandiseDiscount)
   }
   

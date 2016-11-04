@@ -42,6 +42,19 @@ extension AccessPass: AgeVerifiable {
   func hasAccess(toArea area: AccessArea) -> Bool {
     return accessAreas.contains(area)
   }
+  
+  var contactInfo: ContactInformation? {
+    switch type {
+    case is HourlyEmployeeType:
+      let employeeType = type as! HourlyEmployeeType
+      return employeeType.contactInformation
+    case is ManagerType:
+      let managerType = type as! ManagerType
+      return managerType.contactInformation
+    default:
+      return nil
+    }
+  }
 }
 
 extension AccessPass {
