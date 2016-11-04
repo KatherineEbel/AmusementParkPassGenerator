@@ -8,17 +8,36 @@
 
 import Foundation
 
+// date format must be "yyyy-MM-dd"
 typealias BirthDate = String
 
-protocol AgeVerified {
-  static func years(fromSeconds seconds: TimeInterval) -> TimeInterval
-  static func birthdate(dateString: String, meetsRequirement age: Double) throws -> Bool
+protocol AgeVerifiable {
+  var dateFormatter: DateFormatter { get }
+  func years(fromSeconds seconds: TimeInterval) -> TimeInterval
+  func birthDate(dateString: String, meetsRequirement age: Double) throws -> Bool
 }
 
-extension AgeVerified {
-  static func years(fromSeconds seconds: TimeInterval) -> TimeInterval {
+extension AgeVerifiable {
+  var dateFormatter: DateFormatter {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    return dateFormatter
+  }
+  
+  func years(fromSeconds seconds: TimeInterval) -> TimeInterval {
     // 60 sec per min 60 min per hour 24 hour per day avg 365.2425 day per year
-    let numSecInYear = 60 * 60 * 24 * 365.2425
+    let (secPerMin, minPerHour): (Double, Double) = (60,60)
+    let (hoursPerDay, daysPerYear): (Double, Double) = (24, 365.2425)
+    let numSecInYear = secPerMin * minPerHour * hoursPerDay * daysPerYear
     return seconds / numSecInYear
+  }
+  
+  func birthDate(dateString: BirthDate, meetsRequirement age: Double) throws -> Bool {
+    let today = Date()
+    guard let birthdate = dateFormatter.date(from: dateString) else {
+      throw AccessPassError.InvalidDateFormat
+    }
+    let timeInterval = today.timeIntervalSince(birthdate)
+    return years(fromSeconds: timeInterval) < age
   }
 }

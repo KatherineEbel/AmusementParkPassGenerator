@@ -8,28 +8,35 @@
 
 import Foundation
 
-enum GuestType: ParkEntrant {
+enum GuestType: ParkEntrant, AgeVerifiable {
   case classic
   case VIP
-  case freeChild(birthdate: String)
+  case freeChild(birthdate: BirthDate)
 }
 
 extension GuestType {
-  
-  var discounts: (food: DiscountType, merchandise: DiscountType)? {
+  var discounts: (food: Percent, merchandise: Percent) {
+    let foodDiscount = DiscountType.food(10).discount
+    let merchandiseDiscount = DiscountType.merchandise(15).discount
     switch self {
-    case .VIP: return (.food(10), .merchandise(20))
+    case .VIP: return (foodDiscount, merchandiseDiscount)
     default:
-      return nil
+      return (0, 0)
     }
   }
   
-  var rideAccess: (allRides: RideAccess, skipsQueues: RideAccess) {
+  var rideAccess: (allRides: Bool, skipsQueues: Bool) {
     switch self {
     case .VIP:
-      return (.allRides(true), .skipsQueues(true))
+      let allRides = RideAccess.allRides(true).access
+      let skipsQueues = RideAccess.skipsQueues(true).access
+      return (allRides, skipsQueues)
     default:
-      return (.allRides(true), .skipsQueues(false))
+      return (false, false)
     }
+  }
+  
+  func isVerifiedDate(date: BirthDate) -> Bool {
+    return false
   }
 }

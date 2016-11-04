@@ -10,8 +10,8 @@ import Foundation
 
 protocol ParkEntrant {
   var accessAreas: [AccessArea] { get }
-  var rideAccess: (allRides: RideAccess, skipsQueues: RideAccess) { get }
-  var discounts: (food: DiscountType, merchandise: DiscountType)? { get }
+  var rideAccess: (allRides: Bool, skipsQueues: Bool) { get }
+  var discounts: (food: Percent, merchandise: Percent) { get }
 }
 
 extension ParkEntrant {
@@ -19,11 +19,16 @@ extension ParkEntrant {
     return [.amusement]
   }
   
-  var rideAccess: (allRides: RideAccess, skipsQueues: RideAccess) {
-    return (.allRides(true), .skipsQueues(false))
+  var rideAccess: (allRides: Bool, skipsQueues: Bool) {
+    let allRides = RideAccess.allRides(true).access
+    let skipsQueues = RideAccess.skipsQueues(false).access
+    return (allRides, skipsQueues)
   }
   
-  var discounts: (food: DiscountType, merchandise: DiscountType)? {
-    return nil
+  var discounts: (food: Percent, merchandise: Percent) {
+    return (0, 0)
   }
+}
+
+extension ParkEntrant where Self: AgeVerifiable {
 }

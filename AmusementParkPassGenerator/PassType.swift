@@ -10,4 +10,9 @@ import Foundation
 
 protocol PassType {
   var type: ParkEntrant { get }
+  var foodDiscount: Percent { get }
+  var merchandiseDiscount: Percent { get }
+  var allRideAccess: Bool { get }
+  var skipsQueues: Bool { get }
+  var accessAreas: [AccessArea] { get }
 }

@@ -9,12 +9,10 @@
 import Foundation
 
 protocol Contactable {
-  var firstName: String { get }
-  var lastName: String{ get }
-  var streetAddress: String { get }
-  var city: String { get }
-  var state: String { get }
-  var zipCode: String { get }
-  init?(withDictionary info: [String: String])
+  var contactInformation: ContactInformation { get }
+}
+
+extension Contactable {
+  
 }
 

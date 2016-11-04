@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum ManagerType: ParkEntrant {
-    case manager
+enum ManagerType: ParkEntrant, Contactable {
+    case manager(ContactInformation)
 }
 
 extension ManagerType {
@@ -19,5 +19,11 @@ extension ManagerType {
   
   var accessAreas: [AccessArea] {
     return [.amusement, .kitchen, .maintenance, .rideControl, .office]
+  }
+  
+  var contactInformation: ContactInformation {
+    switch self {
+      case .manager(let contactInformation): return contactInformation
+    }
   }
 }
