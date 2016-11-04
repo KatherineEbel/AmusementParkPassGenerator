@@ -35,7 +35,7 @@ extension GuestType {
         let skipsQueues = RideAccess.skipsQueues(true).access
         return (allRides, skipsQueues)
       default:
-        return (false, false)
+        return (true, false)
     }
   }
 }

@@ -8,16 +8,18 @@
 
 import Foundation
 
-private let managerFoodDiscount: Percent = 25
-private let managerMerchandiseDiscount: Percent = 25
+fileprivate let managerFoodDiscount: Percent = 25
+fileprivate let managerMerchandiseDiscount: Percent = 25
 
 enum ManagerType: ParkEntrant, Contactable {
     case manager(ContactInformation)
 }
 
 extension ManagerType {
-  var discounts: (food: DiscountType, merchandise: DiscountType)? {
-    return (.food(managerFoodDiscount), .merchandise(managerMerchandiseDiscount))
+  var discounts: (food: Percent, merchandise: Percent) {
+    let foodDiscount = DiscountType.food(managerFoodDiscount).discount
+    let merchandiseDiscount = DiscountType.merchandise(managerMerchandiseDiscount).discount
+    return (foodDiscount, merchandiseDiscount)
   }
   
   var accessAreas: [AccessArea] {

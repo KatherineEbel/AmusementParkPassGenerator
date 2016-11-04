@@ -9,6 +9,7 @@
 import Foundation
 
 final class AccessPassGenerator {
+  // only way to create a access pass is the singleton passGenerator
   static let passGenerator = AccessPassGenerator()
   private init() { }
   
@@ -19,7 +20,7 @@ final class AccessPassGenerator {
     }
   }
   
-  func createPass(forEntrant entrant: ParkEntrant) -> AccessPass {
+  public func createPass(forEntrant entrant: ParkEntrant) -> AccessPass {
     if entrant is AgeVerifiable {
       return pass(forGuestType: entrant as! GuestType)
     }
@@ -29,11 +30,12 @@ final class AccessPassGenerator {
     if entrant is ManagerType {
       return AccessPass(type: entrant as! ManagerType)
     }
+    // should never get to this final case
     return AccessPass(type: GuestType.classic)
   }
   
   // the only pass that needs to be verified is the free child pass throw error if date not valid
-  func pass(forGuestType entrant: GuestType) -> AccessPass {
+  private func pass(forGuestType entrant: GuestType) -> AccessPass {
     let pass: AccessPass
     switch entrant {
       case .classic: pass = AccessPass(type: GuestType.classic)
