@@ -10,20 +10,26 @@ import Foundation
 
 final class AccessPassGenerator {
   static let passGenerator = AccessPassGenerator()
+  private init() { }
+  
+  struct AccessPass: PassType, AgeVerifiable {
+    let type: ParkEntrant
+    fileprivate init(type: ParkEntrant) {
+      self.type = type
+    }
+  }
   
   func createPass(forEntrant entrant: ParkEntrant) -> AccessPass {
-    switch entrant {
-    case is GuestType:
-      let type = entrant as! GuestType
-      return pass(forGuestType: type)
-    case is HourlyEmployeeType:
-      let type = entrant as! HourlyEmployeeType
-      return pass(forEmployeeType: type)
-    case is ManagerType:
-      let type = entrant as! ManagerType
-      return pass(forManagerType: type)
-    default: return AccessPass(type: GuestType.classic)
+    if entrant is AgeVerifiable {
+      return pass(forGuestType: entrant as! GuestType)
     }
+    if entrant is HourlyEmployeeType {
+      return AccessPass(type: entrant as! HourlyEmployeeType)
+    }
+    if entrant is ManagerType {
+      return AccessPass(type: entrant as! ManagerType)
+    }
+    return AccessPass(type: GuestType.classic)
   }
   
   // the only pass that needs to be verified is the free child pass throw error if date not valid
@@ -38,9 +44,9 @@ final class AccessPassGenerator {
           if pass.isVerified {
              return pass
           } else {
-            throw AccessPassError.InvalidDateFormat
+            throw AccessPassError.InvalidDateFormat(message: "Please enter birthdate in format of yyyy-MM-dd")
           }
-        } catch AccessPassError.InvalidDateFormat {
+        } catch AccessPassError.FailsChildAgeRequirement(message: "Child does not meet requirement age requirement for free child pass") {
             print("Invalid Date")
         } catch let error {
             fatalError("\(error)")
@@ -48,20 +54,4 @@ final class AccessPassGenerator {
       }
     return pass
   }
-  
-  func pass(forEmployeeType entrant: HourlyEmployeeType) -> AccessPass {
-    switch entrant {
-    case .foodServices(let info): return AccessPass(type: HourlyEmployeeType.foodServices(info))
-    case .maintenance(let info): return AccessPass(type: HourlyEmployeeType.maintenance(info))
-    case .rideServices(let info): return AccessPass(type: HourlyEmployeeType.rideServices(info))
-    }
-  }
-  
-  func pass(forManagerType entrant: ManagerType) -> AccessPass {
-    switch entrant {
-    case .manager(let info):
-      return AccessPass(type: ManagerType.manager(info))
-    }
-  }
-  
 }

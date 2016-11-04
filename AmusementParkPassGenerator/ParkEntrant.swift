@@ -29,6 +29,3 @@ extension ParkEntrant {
     return (0, 0)
   }
 }
-
-extension ParkEntrant where Self: AgeVerifiable {
-}

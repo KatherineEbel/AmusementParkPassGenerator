@@ -9,6 +9,7 @@
 import Foundation
 
 enum AccessPassError: Error {
-  case InvalidContactInfoProvided
-  case InvalidDateFormat
+  case InvalidContactInfoProvided(message: String)
+  case InvalidDateFormat(message: String)
+  case FailsChildAgeRequirement(message: String)
 }

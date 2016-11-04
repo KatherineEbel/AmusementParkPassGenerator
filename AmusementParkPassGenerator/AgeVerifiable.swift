@@ -35,9 +35,13 @@ extension AgeVerifiable {
   func birthDate(dateString: BirthDate, meetsRequirement age: Double) throws -> Bool {
     let today = Date()
     guard let birthdate = dateFormatter.date(from: dateString) else {
-      throw AccessPassError.InvalidDateFormat
+      throw AccessPassError.InvalidDateFormat(message: "Please enter date in format \"yyyy-mm-dd\"")
     }
     let timeInterval = today.timeIntervalSince(birthdate)
+    let entrantAge = years(fromSeconds: timeInterval)
+    guard entrantAge < age else {
+      throw AccessPassError.FailsChildAgeRequirement(message: "Child does not meet age requirements for a free child pass")
+    }
     return years(fromSeconds: timeInterval) < age
   }
 }

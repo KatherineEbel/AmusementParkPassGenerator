@@ -12,19 +12,17 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    let passGenerator = AccessPassGenerator.passGenerator
-    //let incorrectInfo = ["firstName": "Kathy", "lastName": "Ebel"]
-    let info = ["firstName": "Kathy", "lastName": "Ebel", "streetAddress": "201 Pioneer Trail",
+    let passGenerator = AccessPassGenerator.passGenerator // pass generator is responsible for creating all access passes and is a singleton
+    let incorrectInfo = ["firstName": "Kathy", "lastName": "Ebel"] // cannot create ContactInformation that is invalid... an error will be printed
+    let correctInfo = ["firstName": "Kathy", "lastName": "Ebel", "streetAddress": "201 Pioneer Trail",
                 "city": "Green Cove Springs", "state": "FL", "zipCode": "32043"]
-    // let badInfo = ContactInformation(withDictionary: incorrectInfo)
-    // let invalidBirthdate = "2009-10-07"
-    let contactInfo = ContactInformation(withDictionary: info)!
-    let employee = HourlyEmployeeType.rideServices(contactInfo)
-    let employeePass = passGenerator.createPass(forEntrant: employee)
-    print(employeePass.foodDiscount)
-    let hourly = employee.contactInformation
-    print(hourly)
-  
+    let invalidBirthdate = "Jan 20, 20014" // preceding birthdate is not in correct format. Will print error to console when trying to create pass.
+    let rideServicesEmployee = HourlyEmployeeType.rideServices(ContactInformation(withDictionary: correctInfo)!)
+    let employeePass = passGenerator.createPass(forEntrant: rideServicesEmployee)
+    print(employeePass.hasAccess(toArea: .rideControl)) // true
+    print("Employee: \(employeePass.accessAreas)")
+    let childPass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: "2010-10-07"))
+    let child2 = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: invalidBirthdate))
   }
 
   override func didReceiveMemoryWarning() {

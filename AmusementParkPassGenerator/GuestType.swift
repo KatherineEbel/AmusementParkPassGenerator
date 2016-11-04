@@ -30,16 +30,12 @@ extension GuestType {
   
   var rideAccess: (allRides: Bool, skipsQueues: Bool) {
     switch self {
-    case .VIP:
-      let allRides = RideAccess.allRides(true).access
-      let skipsQueues = RideAccess.skipsQueues(true).access
-      return (allRides, skipsQueues)
-    default:
-      return (false, false)
+      case .VIP:
+        let allRides = RideAccess.allRides(true).access
+        let skipsQueues = RideAccess.skipsQueues(true).access
+        return (allRides, skipsQueues)
+      default:
+        return (false, false)
     }
-  }
-  
-  func isVerifiedDate(date: BirthDate) -> Bool {
-    return false
   }
 }

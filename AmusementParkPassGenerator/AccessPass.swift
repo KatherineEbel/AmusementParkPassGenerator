@@ -8,11 +8,8 @@
 
 import Foundation
 
-struct AccessPass: PassType {
-  let type: ParkEntrant
-}
 
-extension AccessPass: AgeVerifiable {
+extension AccessPassGenerator.AccessPass {
   // returns foodDiscount for instance of pass
   var foodDiscount: Percent {
     let foodDiscount = type.discounts.food
@@ -55,25 +52,24 @@ extension AccessPass: AgeVerifiable {
       return nil
     }
   }
-}
-
-extension AccessPass {
+  
   var isVerified: Bool {
-    switch type {
-      case is GuestType:
-        let guestType = type as! GuestType
-        switch guestType {
-          case .freeChild(birthdate: let date):
-            do {
-              let verified = try birthDate(dateString: date, meetsRequirement: 5)
-              return verified
-            } catch let error {
-              print("\(error)")
-            }
-          default: break
-        }
+    if type is AgeVerifiable && type is GuestType {
+    switch type as! GuestType {
+      case .freeChild(birthdate: let date):
+          do {
+            let verified = try birthDate(dateString: date, meetsRequirement: 5)
+            return verified
+          } catch AccessPassError.FailsChildAgeRequirement(message: let message) {
+            print(message)
+          } catch AccessPassError.InvalidDateFormat(message: let message) {
+            print(message)
+          } catch let error {
+            print("\(error)")
+          }
       default: break
+      }
     }
-    return false
+    return true
   }
 }
