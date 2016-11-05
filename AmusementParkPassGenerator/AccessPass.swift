@@ -9,6 +9,7 @@
 import Foundation
 
 
+// AccessPass struct is located in the AccessPassGenerator class
 extension AccessPassGenerator.AccessPass {
   // returns foodDiscount for instance of pass
   var foodDiscount: Percent {
@@ -55,6 +56,8 @@ extension AccessPassGenerator.AccessPass {
     }
   }
   
+  // gets contact details for types that have it, or just
+  // returns message that guest has no details
   var contactDetails: String {
     if let _ = contactInfo {
       if type is Contactable && type is HourlyEmployeeType {
@@ -74,7 +77,7 @@ extension AccessPassGenerator.AccessPass {
     switch type as! GuestType {
       case .freeChild(birthdate: let date):
           do {
-            let verified = try birthDate(dateString: date, meetsRequirement: 5)
+            let verified = try birthDate(dateString: date, meetsRequirement: maxChildAge)
             return verified
           } catch AccessPassError.FailsChildAgeRequirement(message: let message) {
             print(message)

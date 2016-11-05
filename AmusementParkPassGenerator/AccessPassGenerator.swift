@@ -13,13 +13,17 @@ final class AccessPassGenerator {
   static let passGenerator = AccessPassGenerator()
   private init() { }
   
+  // added AccessPass struct to Pass Generator, so initializer for Access Pass can only
+  // be called by generator
   struct AccessPass: PassType, AgeVerifiable {
     let type: ParkEntrant
+    let maxChildAge: Double = 5
     fileprivate init(type: ParkEntrant) {
       self.type = type
     }
   }
   
+  // the only public access point to create passes
   public func createPass(forEntrant entrant: ParkEntrant) -> AccessPass {
     if entrant is AgeVerifiable {
       return pass(forVerifiedEntrant: entrant as! AgeVerifiable) // force cast since has to be AgeVerifiable to get in this block
@@ -34,7 +38,8 @@ final class AccessPassGenerator {
     return AccessPass(type: GuestType.classic)
   }
   
-  // the only pass that needs to be verified is the free child pass throw error if date not valid
+  // the only pass that needs to be verified is the free child pass -- since no UI currently present
+  // default to displaying message and create classic pass for unverified/ or incorrectly formatted dates
   private func pass(forVerifiedEntrant entrant: AgeVerifiable) -> AccessPass {
     let type = entrant as! GuestType
     switch type {

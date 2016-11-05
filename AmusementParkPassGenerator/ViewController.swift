@@ -59,14 +59,16 @@ class ViewController: UIViewController {
      */
     
     // MARK: Test Validating BirthDates
+    
     /*
     let badDateFormat = "12-25-2014"
     let tooOld = "2009-10-07"
     let badDatePass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: badDateFormat)) // should throw error for invalid date format  *********(for now defaults to classic pass, will convert to allow for re-entry when UI implemented to handle incorrect format (An error message is still printed)
-    print(badDatePass.type)
+    print("Pass converted to: \(badDatePass.type)")
     let tooOldPass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: tooOld)) // should throw fails age requirement error (message printed to console) pass will default to classic pass
-    print(tooOldPass.type)
+    print("Pass converted to: \(tooOldPass.type)")
     */
+   
     
     // MARK: Test Free Child Pass
     /*
@@ -105,6 +107,7 @@ class ViewController: UIViewController {
     
     // MARK: Stubs for testing all Employee types
     // MARK: Test Ride Services pass
+    /*
      let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
                 "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
      let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
@@ -116,9 +119,10 @@ class ViewController: UIViewController {
      let accessToRides = "Ride Services pass has access to all rides? \(rideServices.allRideAccess)"
      let info = "Ride Services pass contact info is: \(rideServices.contactDetails)"
      print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(info)")
+     */
     
     // MARK: Test Food Services pass
-     /*
+    /*
      let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
                 "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
      let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
@@ -128,11 +132,10 @@ class ViewController: UIViewController {
      let noAccess = "Food Services pass has access to maintenance areas? \(foodServicesPass.hasAccess(toArea: .maintenance))"
      let skipsQueues = "Food Services pass can skip lines for rides? \(foodServicesPass.skipsQueues)"
      let accessToRides = "Food Services pass has access to all rides? \(foodServicesPass.allRideAccess)"
-     let info = "Food Services pass contact info is \(foodServicesPass.contactInfo!)"
+     let info = "Food Services pass contact info is \(foodServicesPass.contactDetails)"
      let allAreas = "Food Services pass gets access to these areas: \(foodServicesPass.accessAreas)"
-     print("\(discounts)\n\(accessAreas)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(info)\(allAreas)")
+     print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(info)\(allAreas)")
      */
- 
     
       // MARK: Test maintenance pass
     /*
@@ -146,10 +149,9 @@ class ViewController: UIViewController {
     let skipsQueues = "Maintenance pass can skip lines for rides? \(maintenancePass.skipsQueues)"
     let accessToRides = "Maintenance pass has access to all rides? \(maintenancePass.allRideAccess)"
     let info = "Maintenance pass contact info is \(maintenancePass.contactInfo!)"
-    let allAreas = "Manager access areas are \(managerPass.accessAreas)"
-    print("\(discounts)\n\(accessAreas)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(info)\n\(allAreas)")
+    let allAreas = "Maintenance access areas are \(maintenancePass.accessAreas)"
+    print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(info)\n\(allAreas)")
     */
-    
     // MARK: Test Manager Pass
     /*
     let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
@@ -161,7 +163,7 @@ class ViewController: UIViewController {
     let noAccess = "Manager pass has access to office areas? \(managerPass.hasAccess(toArea: .office))"
     let skipsQueues = "Manager pass can skip lines for rides? \(managerPass.skipsQueues)"
     let accessToRides = "Manager pass has access to all rides? \(managerPass.allRideAccess)"
-    let info = "Manager pass contact info is \(managerPass.contactInfo!)"
+    let info = "Manager pass contact info is \(managerPass.contactDetails)"
     let allAreas = "Manager access areas are \(managerPass.accessAreas)"
     print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(allAreas)\n\(info)")
     */

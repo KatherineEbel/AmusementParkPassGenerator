@@ -8,6 +8,7 @@
 
 import Foundation
 
+// private constants for manager food discounts
 fileprivate let managerFoodDiscount: Percent = 25
 fileprivate let managerMerchandiseDiscount: Percent = 25
 
@@ -29,7 +30,6 @@ extension ManagerType {
   }
   
   // returns instance of ContactInformation for an instance of manager type
-  // FIXME: Add description getter for contact info for better display
   var contactInformation: ContactInformation {
     switch self {
       case .manager(let contactInformation): return contactInformation

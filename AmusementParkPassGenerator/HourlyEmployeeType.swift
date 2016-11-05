@@ -19,6 +19,7 @@ enum HourlyEmployeeType: ParkEntrant, Contactable {
 }
 
 extension HourlyEmployeeType {
+  // returns array of areas that each type has access to
   var accessAreas: [AccessArea] {
     switch self {
     case .foodServices: return [.amusement, .kitchen]
@@ -27,6 +28,7 @@ extension HourlyEmployeeType {
     }
   }
   
+  // returns named tuple for discount amounts
   var discounts: (food: Percent, merchandise: Percent) {
     let foodDiscount = DiscountType.food(employeeFoodDiscount).discount
     let merchandiseDiscount = DiscountType.merchandise(employeeMerchandiseDicount).discount

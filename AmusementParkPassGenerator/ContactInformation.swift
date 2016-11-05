@@ -27,7 +27,7 @@ extension ContactInformation {
         self.init(firstName: firstName, lastName: lastName, streetAddress: streetAddress,
                   city: city, state: state, zipCode: zipCode)
       } else {
-        throw AccessPassError.InvalidContactInfoProvided(message: "Valid contact information includes: First name, last name, street address, city, state, and zipcode")
+        throw AccessPassError.InvalidContactInfoProvided(message: "Invalid Information: Valid contact information includes: First name, last name, street address, city, state, and zipcode")
       }
     } catch AccessPassError.InvalidContactInfoProvided(message: let message) {
       print(message)

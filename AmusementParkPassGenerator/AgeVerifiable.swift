@@ -11,6 +11,7 @@ import Foundation
 // date format must be "yyyy-MM-dd"
 typealias BirthDate = String
 
+// Currently only GuestTypes are AgeVerifiable
 protocol AgeVerifiable {
   var dateFormatter: DateFormatter { get }
   func years(fromSeconds seconds: TimeInterval) -> TimeInterval
@@ -24,6 +25,7 @@ extension AgeVerifiable {
     return dateFormatter
   }
   
+  // converts passed in timeInterval (seconds) to number of years
   func years(fromSeconds seconds: TimeInterval) -> TimeInterval {
     // 60 sec per min 60 min per hour 24 hour per day avg 365.2425 day per year
     let (secPerMin, minPerHour): (Double, Double) = (60,60)
@@ -40,7 +42,7 @@ extension AgeVerifiable {
     let timeInterval = today.timeIntervalSince(birthdate)
     let entrantAge = years(fromSeconds: timeInterval)
     guard entrantAge < age else {
-      throw AccessPassError.FailsChildAgeRequirement(message: "Child does not meet age requirements for a free child pass\n Pass converted to Classic Pass")
+      throw AccessPassError.FailsChildAgeRequirement(message: "Child does not meet age requirements for a free child pass\nPass converted to Classic Pass")
     }
     return years(fromSeconds: timeInterval) < age
   }
