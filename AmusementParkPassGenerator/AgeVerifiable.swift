@@ -40,7 +40,7 @@ extension AgeVerifiable {
     let timeInterval = today.timeIntervalSince(birthdate)
     let entrantAge = years(fromSeconds: timeInterval)
     guard entrantAge < age else {
-      throw AccessPassError.FailsChildAgeRequirement(message: "Child does not meet age requirements for a free child pass")
+      throw AccessPassError.FailsChildAgeRequirement(message: "Child does not meet age requirements for a free child pass\n Pass converted to Classic Pass")
     }
     return years(fromSeconds: timeInterval) < age
   }

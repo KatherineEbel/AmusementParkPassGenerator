@@ -22,7 +22,7 @@ final class AccessPassGenerator {
   
   public func createPass(forEntrant entrant: ParkEntrant) -> AccessPass {
     if entrant is AgeVerifiable {
-      return pass(forGuestType: entrant as! GuestType)
+      return pass(forVerifiedEntrant: entrant as! AgeVerifiable) // force cast since has to be AgeVerifiable to get in this block
     }
     if entrant is HourlyEmployeeType {
       return AccessPass(type: entrant as! HourlyEmployeeType)
@@ -35,27 +35,18 @@ final class AccessPassGenerator {
   }
   
   // the only pass that needs to be verified is the free child pass throw error if date not valid
-  private func pass(forGuestType entrant: GuestType) -> AccessPass {
-    let pass: AccessPass
-    switch entrant {
-      case .classic: pass = AccessPass(type: GuestType.classic)
-      case .VIP: pass = AccessPass(type: GuestType.VIP)
-      case .freeChild(birthdate: let birthDate):
-        do {
-          pass = AccessPass(type: GuestType.freeChild(birthdate: birthDate))
-          if pass.isVerified {
-             return pass
-          } else {
-            throw AccessPassError.InvalidDateFormat(message: "Please enter birthdate in format of yyyy-MM-dd")
-          }
-        } catch AccessPassError.FailsChildAgeRequirement(message: let message) {
-          print(message)
-        } catch AccessPassError.InvalidDateFormat(message: let message) {
-          print(message)
-        } catch let error {
-          fatalError("\(error)")
-      }
-      }
-    return pass
+  private func pass(forVerifiedEntrant entrant: AgeVerifiable) -> AccessPass {
+    let type = entrant as! GuestType
+    switch type {
+    case .classic: return AccessPass(type: GuestType.classic)
+    case .VIP: return AccessPass(type: GuestType.VIP)
+    case .freeChild(birthdate: let birthDate):
+      let pass = AccessPass(type: GuestType.freeChild(birthdate: birthDate))
+        if pass.isVerified {
+           return pass
+        } else {
+          return AccessPass(type: GuestType.classic)
+        }
+    }
   }
 }

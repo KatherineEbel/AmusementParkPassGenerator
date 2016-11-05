@@ -57,15 +57,16 @@ class ViewController: UIViewController {
      */
     
     // MARK: Test Validating BirthDates
-    /*
     let badDateFormat = "12-25-2014"
-    let goodDateFormat = "2014-25-12"
     let tooOld = "2009-10-07"
-    let badDatePass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: badDateFormat)) // should throw error for invalid date format
-    let tooOldPass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: tooOld)) // should throw fails age requirement error
-    */
+    let badDatePass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: badDateFormat)) // should throw error for invalid date format  *********(for now defaults to classic pass, will convert to allow for re-entry when UI implemented to handle incorrect format (An error message is still printed)
+    print(badDatePass.type)
+    let tooOldPass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: tooOld)) // should throw fails age requirement error (message printed to console) pass will default to classic pass
+    print(tooOldPass.type)
+    
     // MARK: Test Free Child Pass
-    let goodDateFormat = "2014-25-12"
+    /*
+    let goodDateFormat = "2014-12-25"
     let childPass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: goodDateFormat))
     let discounts = "Child guest gets a food discount of \(childPass.foodDiscount)%, and a merchandise discount of \(childPass.merchandiseDiscount)%"
     let hasAccess = "Child Guest pass has access to amusement areas? \(childPass.hasAccess(toArea: .amusement))"
@@ -79,6 +80,7 @@ class ViewController: UIViewController {
     }
     print("Child guest birthdate has been verified? \(childPass.isVerified)")
     print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n")
+    */
     
     // MARK: info for testing employee and manager contact information
     /*
