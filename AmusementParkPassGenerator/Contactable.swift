@@ -11,8 +11,3 @@ import Foundation
 protocol Contactable {
   var contactInformation: ContactInformation { get }
 }
-
-extension Contactable {
-  
-}
-

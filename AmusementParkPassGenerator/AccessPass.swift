@@ -55,6 +55,19 @@ extension AccessPassGenerator.AccessPass {
     }
   }
   
+  var contactDetails: String {
+    if let _ = contactInfo {
+      if type is Contactable && type is HourlyEmployeeType {
+        let hourlyEmployee = type as! HourlyEmployeeType
+        return hourlyEmployee.contactDetails
+      } else if type is Contactable && type is ManagerType {
+        let manager = type as! ManagerType
+        return manager.contactDetails
+      }
+    }
+    return "Guest has no contact details"
+  }
+  
   // checks birthdate for age verifiable passes returns true if meets requirements
   var isVerified: Bool {
     if type is AgeVerifiable && type is GuestType {

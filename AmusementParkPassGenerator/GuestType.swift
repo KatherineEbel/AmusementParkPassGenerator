@@ -18,6 +18,7 @@ enum GuestType: ParkEntrant, AgeVerifiable {
 }
 
 extension GuestType {
+  // returns a named tuple for each GuestType case (accessed by discounts.food, discounts.merchandise)
   var discounts: (food: Percent, merchandise: Percent) {
     let foodDiscount = DiscountType.food(vipFoodDiscount).discount
     let merchandiseDiscount = DiscountType.merchandise(vipMerchandiseDicount).discount
@@ -28,6 +29,7 @@ extension GuestType {
     }
   }
   
+  // returns a named tuple for each GuestType case (accessed by rideAccess.allRides, rideAccess.skipsQueues)
   var rideAccess: (allRides: Bool, skipsQueues: Bool) {
     switch self {
       case .VIP:

@@ -33,6 +33,9 @@ extension HourlyEmployeeType {
     return (foodDiscount, merchandiseDiscount)
   }
   
+  
+  // returns instance of ContactInformation for an instance of manager type
+  // FIXME: Add description getter for contact info for better display
   var contactInformation: ContactInformation {
     switch self {
       case .foodServices(let contactInformation): return contactInformation

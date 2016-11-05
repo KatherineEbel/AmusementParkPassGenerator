@@ -41,6 +41,7 @@ class ViewController: UIViewController {
      */
     
      // MARK: Test VIP Guest
+    
      /*
      let vipGuest = passGenerator.createPass(forEntrant: GuestType.VIP)
      let discounts = "VIP guest gets a food discount of \(vipGuest.foodDiscount)%, and a merchandise discount of \(vipGuest.merchandiseDiscount)%"
@@ -53,16 +54,19 @@ class ViewController: UIViewController {
      } else {
        print("VIP guest has no contact information")
      }
+     print(vipGuest.contactDetails)
      print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n")
      */
     
     // MARK: Test Validating BirthDates
+    /*
     let badDateFormat = "12-25-2014"
     let tooOld = "2009-10-07"
     let badDatePass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: badDateFormat)) // should throw error for invalid date format  *********(for now defaults to classic pass, will convert to allow for re-entry when UI implemented to handle incorrect format (An error message is still printed)
     print(badDatePass.type)
     let tooOldPass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: tooOld)) // should throw fails age requirement error (message printed to console) pass will default to classic pass
     print(tooOldPass.type)
+    */
     
     // MARK: Test Free Child Pass
     /*
@@ -101,7 +105,6 @@ class ViewController: UIViewController {
     
     // MARK: Stubs for testing all Employee types
     // MARK: Test Ride Services pass
-    /*
      let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
                 "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
      let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
@@ -111,9 +114,8 @@ class ViewController: UIViewController {
      let noAccess = "ride Services pass has access to office areas? \(rideServices.hasAccess(toArea: .office))"
      let skipsQueues = "Ride Services pass can skip lines for rides? \(rideServices.skipsQueues)"
      let accessToRides = "Ride Services pass has access to all rides? \(rideServices.allRideAccess)"
-     let info = "Ride Services pass contact info is \(rideServices.contactInfo!)"
+     let info = "Ride Services pass contact info is: \(rideServices.contactDetails)"
      print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(info)")
-     */
     
     // MARK: Test Food Services pass
      /*

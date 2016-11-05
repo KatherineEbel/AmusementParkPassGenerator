@@ -16,16 +16,20 @@ enum ManagerType: ParkEntrant, Contactable {
 }
 
 extension ManagerType {
+  // returns a named tuple for each GuestType case (accessed by discounts.food, discounts.merchandise)
   var discounts: (food: Percent, merchandise: Percent) {
     let foodDiscount = DiscountType.food(managerFoodDiscount).discount
     let merchandiseDiscount = DiscountType.merchandise(managerMerchandiseDiscount).discount
     return (foodDiscount, merchandiseDiscount)
   }
   
+  // returns a named tuple for each GuestType case (accessed by rideAccess.allRides, rideAccess.skipsQueues)
   var accessAreas: [AccessArea] {
     return [.amusement, .kitchen, .maintenance, .rideControl, .office]
   }
   
+  // returns instance of ContactInformation for an instance of manager type
+  // FIXME: Add description getter for contact info for better display
   var contactInformation: ContactInformation {
     switch self {
       case .manager(let contactInformation): return contactInformation
