@@ -31,6 +31,7 @@ extension AccessPassGenerator.AccessPass {
     return type.rideAccess.skipsQueues
   }
   
+  // returns array of all access areas
   var accessAreas: [AccessArea] {
     return type.accessAreas
   }
@@ -40,6 +41,7 @@ extension AccessPassGenerator.AccessPass {
     return accessAreas.contains(area)
   }
   
+  // not all passes contain contact info so returns optional contact info
   var contactInfo: ContactInformation? {
     switch type {
     case is HourlyEmployeeType:
@@ -53,6 +55,7 @@ extension AccessPassGenerator.AccessPass {
     }
   }
   
+  // checks birthdate for age verifiable passes returns true if meets requirements
   var isVerified: Bool {
     if type is AgeVerifiable && type is GuestType {
     switch type as! GuestType {
@@ -69,7 +72,9 @@ extension AccessPassGenerator.AccessPass {
           }
       default: break
       }
+    } else {
+      return false
     }
-    return true
+    return false
   }
 }

@@ -48,11 +48,13 @@ final class AccessPassGenerator {
           } else {
             throw AccessPassError.InvalidDateFormat(message: "Please enter birthdate in format of yyyy-MM-dd")
           }
-        } catch AccessPassError.FailsChildAgeRequirement(message: "Child does not meet requirement age requirement for free child pass") {
-            print("Invalid Date")
+        } catch AccessPassError.FailsChildAgeRequirement(message: let message) {
+          print(message)
+        } catch AccessPassError.InvalidDateFormat(message: let message) {
+          print(message)
         } catch let error {
-            fatalError("\(error)")
-        }
+          fatalError("\(error)")
+      }
       }
     return pass
   }

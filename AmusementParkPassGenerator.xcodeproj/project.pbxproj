@@ -109,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				27F84F861DCD5201000B4D52 /* Helper/Error Types */,
-				44F2A9321DCCD64200267F24 /* Park Entitilements */,
+				44F2A9321DCCD64200267F24 /* Park Entitlements */,
 				44F2A9391DCCD70900267F24 /* Entrant Types */,
 				27F84F851DCD51CB000B4D52 /* PassGeneratorTypes */,
 			);
@@ -134,14 +134,14 @@
 			name = "Helper/Error Types";
 			sourceTree = "<group>";
 		};
-		44F2A9321DCCD64200267F24 /* Park Entitilements */ = {
+		44F2A9321DCCD64200267F24 /* Park Entitlements */ = {
 			isa = PBXGroup;
 			children = (
 				44F2A9331DCCD66100267F24 /* RideAccess.swift */,
 				44F2A9351DCCD69000267F24 /* DiscountType.swift */,
 				44F2A9371DCCD6B100267F24 /* AccessArea.swift */,
 			);
-			name = "Park Entitilements";
+			name = "Park Entitlements";
 			sourceTree = "<group>";
 		};
 		44F2A9391DCCD70900267F24 /* Entrant Types */ = {
