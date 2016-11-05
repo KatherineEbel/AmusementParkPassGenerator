@@ -6,7 +6,7 @@
 //  Copyright © 2016 Katherine Ebel. All rights reserved.
 //
 
-enum AccessArea {
+enum AccessArea: String {
   case amusement
   case kitchen
   case rideControl
