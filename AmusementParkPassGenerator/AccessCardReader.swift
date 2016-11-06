@@ -6,8 +6,6 @@
 //  Copyright © 2016 Katherine Ebel. All rights reserved.
 //
 
-import Foundation
-
 struct AccessCardReader: CardReader {
   static let cardReader = AccessCardReader()
   private init() {}
