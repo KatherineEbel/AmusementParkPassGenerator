@@ -17,6 +17,8 @@ class ViewController: UIViewController {
      ** The passGenerator (line 21) needs to be uncommented for creating all pass types
      ** The cardReader variable (line 24) needs to be uncommented also to read pass info
      ** (comment out individual swipe tests to hear sounds for one test)
+   I created a button action, just uncomment the code you want to test and click the button
+   to run the code
   *///
   @IBAction func testAccess() {
     // MARK: Pass Generator
@@ -89,7 +91,7 @@ class ViewController: UIViewController {
 //    let failingInfo = ContactInformation(withDictionary: incorrectInfo) // cannot create contact info if dictionary doesn't have correct values
 //    if let goodInfo = failingInfo {
 //      let failingPass = passGenerator.createPass(forEntrant: HourlyEmployeeType.rideServices(goodInfo))
-//      print(failingPass.contactInfo!)
+//      print(failingPass.contactDetails)
 //    } else {
 //        print("Info was bad, so pass not created")
 //     

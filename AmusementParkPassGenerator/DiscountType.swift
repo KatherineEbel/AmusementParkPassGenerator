@@ -14,6 +14,8 @@ enum DiscountType {
 }
 
 extension DiscountType {
+  
+  // Values are associated with each Entrant type as a computed property
   var discount: Percent {
     switch self {
       case .food(let percent): return percent
