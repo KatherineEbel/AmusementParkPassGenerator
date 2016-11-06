@@ -33,6 +33,8 @@ class ViewController: UIViewController {
     print(cardReader.rideAccess(forPass: vipPass))
     print(cardReader.discountAccess(forPass: vipPass))
     print(cardReader.discountAccess(forPass: pass))
+    let testHappyBirthday = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: "2016-11-05"))
+    print(cardReader.alertBirthday(forPass: testHappyBirthday))
      // MARK: Stubs for testing GuestTypes
      // MARK: Test Classic Guest
 //     let classicGuest = passGenerator.createPass(forEntrant: GuestType.classic)

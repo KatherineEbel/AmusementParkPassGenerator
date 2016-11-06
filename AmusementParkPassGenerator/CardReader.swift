@@ -5,6 +5,7 @@
 //  Created by Katherine Ebel on 11/5/16.
 //  Copyright © 2016 Katherine Ebel. All rights reserved.
 //
+import Foundation
 
 typealias AccessMessage = String
 protocol CardReader {
@@ -51,7 +52,31 @@ extension CardReader {
   }
   
   func alertBirthday(forPass pass: PassType) -> AccessMessage {
-    return ""
+    guard pass.type is AgeVerifiable && pass.type is GuestType else {
+      return ""
+    }
+    switch pass.type as! GuestType {
+    case .classic, .VIP: return ""
+    case .freeChild(birthdate: let birthday):
+      let isMatch = isBirthday(forPass: pass, withDate: birthday)
+      return isMatch ? "Happy Birthday!" : ""
+    }
+    
   }
-  
+  // MARK: Helper methods
+  // this formats the entrants birthday and current days date in the same way, and
+  // strips the year off of both and compares the remaining strings. If they are 
+  // equal, it is the entrant's birthday.
+  // I currently only have birthdays attached to child passes.
+  func isBirthday(forPass pass: PassType, withDate date: BirthDate) -> Bool {
+    let accessPass = pass as! AccessPassGenerator.AccessPass
+    let formatter = accessPass.dateFormatter
+    let todaysDate = formatter.string(from: Date())
+    let index: String.Index = date.index(date.startIndex, offsetBy: 5)
+    if date.substring(from: index) == todaysDate.substring(from: index) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
