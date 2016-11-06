@@ -31,7 +31,8 @@ class ViewController: UIViewController {
     print(cardReader.rideAccess(forPass: pass))
     let vipPass = passGenerator.createPass(forEntrant: GuestType.VIP)
     print(cardReader.rideAccess(forPass: vipPass))
-    
+    print(cardReader.discountAccess(forPass: vipPass))
+    print(cardReader.discountAccess(forPass: pass))
      // MARK: Stubs for testing GuestTypes
      // MARK: Test Classic Guest
 //     let classicGuest = passGenerator.createPass(forEntrant: GuestType.classic)

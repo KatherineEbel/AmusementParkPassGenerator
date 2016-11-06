@@ -41,7 +41,13 @@ extension CardReader {
   }
   
   func discountAccess(forPass pass: PassType) -> AccessMessage {
-    return ""
+    let foodDiscount = pass.foodDiscount
+    let merchandiseDiscount = pass.merchandiseDiscount
+    if foodDiscount == 0 && merchandiseDiscount == 0 {
+      return "This pass is not eligible for any discounts"
+    } else {
+      return "This pass gets a food discount of \(foodDiscount)%, and a merchandise discount of \(merchandiseDiscount)%"
+    }
   }
   
   func alertBirthday(forPass pass: PassType) -> AccessMessage {
