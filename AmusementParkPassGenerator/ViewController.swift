@@ -14,85 +14,75 @@ class ViewController: UIViewController {
      Use jump bar to go to marked areas to test each type
      For testing birth dates you can uncomment just the "Test validating Birthdates" section
      For testing Contact info just uncomment the "info for testing contact info section"
-     ** The passGenerator (line 22) needs to be uncommented for creating all pass types
+     ** The passGenerator (line 21) needs to be uncommented for creating all pass types
+     ** The cardReader variable (line 24) needs to be uncommented also to read pass info
+     ** (comment out individual swipe tests to hear sounds for one test)
+   I created a button action, just uncomment the code you want to test and click the button
+   to run the code
   *///
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  @IBAction func testAccess() {
     // MARK: Pass Generator
     let passGenerator = AccessPassGenerator.passGenerator // pass generator is responsible for creating all access passes and is a singleton
     
-    let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
-                "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
-    let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
+    // MARK: Card Reader
     let cardReader = AccessCardReader.cardReader
-    let pass = passGenerator.createPass(forEntrant: ManagerType.manager(contactInfo))
-    print(cardReader.areaAccess(forPass: pass))
-    print(cardReader.rideAccess(forPass: pass))
-    let vipPass = passGenerator.createPass(forEntrant: GuestType.VIP)
-    print(cardReader.rideAccess(forPass: vipPass))
-    print(cardReader.discountAccess(forPass: vipPass))
-    print(cardReader.discountAccess(forPass: pass))
-    let testHappyBirthday = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: "2016-11-05"))
-    print(cardReader.alertBirthday(forPass: testHappyBirthday))
-     // MARK: Stubs for testing GuestTypes
-     // MARK: Test Classic Guest
-//     let classicGuest = passGenerator.createPass(forEntrant: GuestType.classic)
-//     let discounts = "Classic guest gets a food discount of \(classicGuest.foodDiscount)%, and a merchandise discount of \(classicGuest.merchandiseDiscount)%"
-//     let accessAreas = "Classic Guest pass has access to amusement areas? \(classicGuest.hasAccess(toArea: .amusement))"
-//     let noAccess = "Classic Guest pass has access to kitchen areas? \(classicGuest.hasAccess(toArea: .kitchen))"
-//     let skipsQueues = "Classic Guest pass can skip lines for rides? \(classicGuest.skipsQueues)"
-//     let accessToRides = "Classic Guest pass has access to all rides? \(classicGuest.allRideAccess)"
-//     if let info = classicGuest.contactInfo {
-//       let _ = "Classic guest contact info: \(info)" // will not get in here contact info is nil
-//     } else {
-//       print("Classic guest has no contact information")
-//     }
-//     print("\(discounts)\n\(accessAreas)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n")
     
-     // MARK: Test VIP Guest
+     // MARK: Stubs for testing GuestTypes
+    
+     // MARK: Test Classic Guest  (comment out individual swipe tests to hear sounds for one test)
+    
+//     let classicGuest = passGenerator.createPass(forEntrant: GuestType.classic)
+//     print(cardReader.discountAccess(forPass: classicGuest)) // prints list of available discounts
+//     print(cardReader.areaAccess(forPass: classicGuest)) // prints all areas accessible to pass
+//     print(classicGuest.contactDetails) // how to access contact details (classic guest won't have any)
+     // test swipe feature
+//     print(cardReader.accessPass(classicGuest, discountFor: .food(classicGuest.foodDiscount)))
+//     print(cardReader.accessPass(classicGuest, discountFor: .merchandise(classicGuest.merchandiseDiscount)))
+//     print(cardReader.accessPass(classicGuest, hasAccessTo: .amusement))  // does have access
+//     print(cardReader.accessPass(classicGuest, hasAccessTo: .maintenance)) // doesn't have access
+//     print(cardReader.accessPass(classicGuest, hasRideAccess: .allRides(classicGuest.allRideAccess)))
+//     print(cardReader.accessPass(classicGuest, hasRideAccess: .skipsQueues(classicGuest.skipsQueues)))
+    
+         // MARK: Test VIP Guest
     
 //     let vipGuest = passGenerator.createPass(forEntrant: GuestType.VIP)
-//     let discounts = "VIP guest gets a food discount of \(vipGuest.foodDiscount)%, and a merchandise discount of \(vipGuest.merchandiseDiscount)%"
-//     let hasAccess = "VIP Guest pass has access to amusement areas? \(vipGuest.hasAccess(toArea: .amusement))"
-//     let noAccess = "VIP Guest pass has access to office areas? \(vipGuest.hasAccess(toArea: .office))"
-//     let skipsQueues = "VIP Guest pass can skip lines for rides? \(vipGuest.skipsQueues)"
-//     let accessToRides = "VIP Guest pass has access to all rides? \(vipGuest.allRideAccess)"
-//     if let info = vipGuest.contactInfo {
-//       let _ = "VIP guest contact info: \(info)" // will not get in here contact info is nil
-//     } else {
-//       print("VIP guest has no contact information")
-//     }
-//     print(vipGuest.contactDetails)
-//     print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n")
+//     print(cardReader.discountAccess(forPass: vipGuest)) // prints list of available discounts
+//     print(cardReader.areaAccess(forPass: vipGuest)) // prints all areas accessible to pass
+//     print(vipGuest.contactDetails) // how to access contact details (classic guest won't have any)
+//     // test swipe feature
+//     print(cardReader.accessPass(vipGuest, discountFor: .food(vipGuest.foodDiscount)))
+//     print(cardReader.accessPass(vipGuest, discountFor: .merchandise(vipGuest.merchandiseDiscount)))
+//     print(cardReader.accessPass(vipGuest, hasAccessTo: .amusement))  // does have access
+//     print(cardReader.accessPass(vipGuest, hasAccessTo: .maintenance)) // doesn't have access
+//     print(cardReader.accessPass(vipGuest, hasRideAccess: .allRides(vipGuest.allRideAccess)))
+//     print(cardReader.accessPass(vipGuest, hasRideAccess: .skipsQueues(vipGuest.skipsQueues)))
     
-    // MARK: Test Validating BirthDates
+      // MARK: Test Validating BirthDates
     
 //    let badDateFormat = "12-25-2014"
 //    let tooOld = "2009-10-07"
-//    let badDatePass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: badDateFormat)) // should throw error for invalid date format  *********(for now defaults to classic pass, will convert to allow for re-entry when UI implemented to handle incorrect format (An error message is still printed)
-//    print("Pass converted to: \(badDatePass.type)")
+//    let badDatePass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: badDateFormat)) // should throw error for invalid date format  *********(for now defaults to classic pass, will convert to allow for re-entering info when UI implemented to handle incorrect format (An error message is still printed)
 //    let tooOldPass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: tooOld)) // should throw fails age requirement error (message printed to console) pass will default to classic pass
 //    print("Pass converted to: \(tooOldPass.type)")
- 
     
     // MARK: Test Free Child Pass
-//    let goodDateFormat = "2014-12-25"
-//    let childPass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: goodDateFormat))
-//    let discounts = "Child guest gets a food discount of \(childPass.foodDiscount)%, and a merchandise discount of \(childPass.merchandiseDiscount)%"
-//    let hasAccess = "Child Guest pass has access to amusement areas? \(childPass.hasAccess(toArea: .amusement))"
-//    let noAccess = "Child Guest pass has access to office areas? \(childPass.hasAccess(toArea: .office))"
-//    let skipsQueues = "Child Guest pass can skip lines for rides? \(childPass.skipsQueues)"
-//    let accessToRides = "Child Guest pass has access to all rides? \(childPass.allRideAccess)"
-//    if let info = childPass.contactInfo {
-//      let _ = "Child guest contact info: \(info)" // will not get in here contact info is nil
-//    } else {
-//      print("Child guest has no contact information")
-//    }
-//    print("Child guest birthdate has been verified? \(childPass.isVerified)")
-//    print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n")
     
-    // MARK: info for testing employee and manager contact information
+//     let goodDateFormat = "2014-11-07" // change 11-07 to current date to test birthday swipe
+//    
+//     let childGuest = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: goodDateFormat))
+//     print(cardReader.discountAccess(forPass: childGuest)) // prints list of available discounts
+//     print(cardReader.areaAccess(forPass: childGuest)) // prints all areas accessible to pass
+//     print(childGuest.contactDetails) // how to access contact details (classic guest won't have any)
+//     // test swipe feature
+//     print(cardReader.accessPass(childGuest, discountFor: .food(childGuest.foodDiscount)))
+//     print(cardReader.accessPass(childGuest, discountFor: .merchandise(childGuest.merchandiseDiscount)))
+//     print(cardReader.accessPass(childGuest, hasAccessTo: .amusement))  // does have access
+//     print(cardReader.accessPass(childGuest, hasAccessTo: .maintenance)) // doesn't have access
+//     print(cardReader.accessPass(childGuest, hasRideAccess: .allRides(childGuest.allRideAccess)))
+//     print(cardReader.accessPass(childGuest, hasRideAccess: .skipsQueues(childGuest.skipsQueues)))
+    
+     // MARK: Info for testing employee and manager contact information
+    
 //    let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
 //                "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
 //    let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
@@ -101,66 +91,84 @@ class ViewController: UIViewController {
 //    let failingInfo = ContactInformation(withDictionary: incorrectInfo) // cannot create contact info if dictionary doesn't have correct values
 //    if let goodInfo = failingInfo {
 //      let failingPass = passGenerator.createPass(forEntrant: HourlyEmployeeType.rideServices(goodInfo))
-//      print(failingPass.contactInfo!)
+//      print(failingPass.contactDetails)
 //    } else {
 //        print("Info was bad, so pass not created")
 //     
 //    }
     
     // MARK: Stubs for testing all Employee types
+    
     // MARK: Test Ride Services pass
+    
 //     let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
 //                "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
 //     let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
 //     let rideServices = passGenerator.createPass(forEntrant: HourlyEmployeeType.rideServices(contactInfo))
-//     let discounts = "Ride Services employee gets a food discount of \(rideServices.foodDiscount)%, and a merchandise discount of \(rideServices.merchandiseDiscount)%"
-//     let hasAccess = "ride Services pass has access to ride control areas? \(rideServices.hasAccess(toArea: .rideControl))"
-//     let noAccess = "ride Services pass has access to office areas? \(rideServices.hasAccess(toArea: .office))"
-//     let skipsQueues = "Ride Services pass can skip lines for rides? \(rideServices.skipsQueues)"
-//     let accessToRides = "Ride Services pass has access to all rides? \(rideServices.allRideAccess)"
-//     let info = "Ride Services pass contact info is: \(rideServices.contactDetails)"
-//     print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(info)")
+//     print(cardReader.discountAccess(forPass: rideServices)) // prints list of available discounts
+//     print(cardReader.areaAccess(forPass: rideServices)) // prints all areas accessible to pass
+//     print(rideServices.contactDetails) // how to access contact details
+//     // test swipe feature
+//     print(cardReader.accessPass(rideServices, discountFor: .food(rideServices.foodDiscount)))
+//     print(cardReader.accessPass(rideServices, discountFor: .merchandise(rideServices.merchandiseDiscount)))
+//     print(cardReader.accessPass(rideServices, hasAccessTo: .rideControl))  // does have access
+//     print(cardReader.accessPass(rideServices, hasAccessTo: .maintenance)) // doesn't have access
+//     print(cardReader.accessPass(rideServices, hasRideAccess: .allRides(rideServices.allRideAccess)))
+//     print(cardReader.accessPass(rideServices, hasRideAccess: .skipsQueues(rideServices.skipsQueues)))
     
-    // MARK: Test Food Services pass
+     // MARK: Test Food Services pass
+    
 //     let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
 //                "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
 //     let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
-//     let foodServicesPass = passGenerator.createPass(forEntrant: HourlyEmployeeType.foodServices(contactInfo))
-//     let discounts = "Food Services Services employee gets a food discount of \(foodServicesPass.foodDiscount)%, and a merchandise discount of \(foodServicesPass.merchandiseDiscount)%"
-//     let hasAccess = "Food Services pass has access to kitchen areas? \(foodServicesPass.hasAccess(toArea: .kitchen))"
-//     let noAccess = "Food Services pass has access to maintenance areas? \(foodServicesPass.hasAccess(toArea: .maintenance))"
-//     let skipsQueues = "Food Services pass can skip lines for rides? \(foodServicesPass.skipsQueues)"
-//     let accessToRides = "Food Services pass has access to all rides? \(foodServicesPass.allRideAccess)"
-//     let info = "Food Services pass contact info is \(foodServicesPass.contactDetails)"
-//     let allAreas = "Food Services pass gets access to these areas: \(foodServicesPass.accessAreas)"
-//     print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(info)\(allAreas)")
+//     let foodService = passGenerator.createPass(forEntrant: HourlyEmployeeType.foodServices(contactInfo))
+//     print(cardReader.discountAccess(forPass: foodService)) // prints list of available discounts
+//     print(cardReader.areaAccess(forPass: foodService)) // prints all areas accessible to pass
+//     print(foodService.contactDetails) // how to access contact details
+//     // test swipe feature
+//     print(cardReader.accessPass(foodService, discountFor: .food(foodService.foodDiscount)))
+//     print(cardReader.accessPass(foodService, discountFor: .merchandise(foodService.merchandiseDiscount)))
+//     print(cardReader.accessPass(foodService, hasAccessTo: .kitchen))  // does have access
+//     print(cardReader.accessPass(foodService, hasAccessTo: .maintenance)) // doesn't have access
+//     print(cardReader.accessPass(foodService, hasRideAccess: .allRides(foodService.allRideAccess)))
+//     print(cardReader.accessPass(foodService, hasRideAccess: .skipsQueues(foodService.skipsQueues)))
     
-      // MARK: Test maintenance pass
-//    let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
+    // MARK: Test Maintenance Pass
+    
+//     let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
 //                "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
-//    let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
-//    let maintenancePass = passGenerator.createPass(forEntrant: HourlyEmployeeType.maintenance(contactInfo))
-//    let discounts = "Maintenance employee gets a food discount of \(maintenancePass.foodDiscount)%, and a merchandise discount of \(maintenancePass.merchandiseDiscount)%"
-//    let hasAccess = "Maintenance pass has access to maintenance areas? \(maintenancePass.hasAccess(toArea: .maintenance))"
-//    let noAccess = "Maintenance pass has access to office areas? \(maintenancePass.hasAccess(toArea: .office))"
-//    let skipsQueues = "Maintenance pass can skip lines for rides? \(maintenancePass.skipsQueues)"
-//    let accessToRides = "Maintenance pass has access to all rides? \(maintenancePass.allRideAccess)"
-//    let info = "Maintenance pass contact info is \(maintenancePass.contactInfo!)"
-//    let allAreas = "Maintenance access areas are \(maintenancePass.accessAreas)"
-//    print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(info)\n\(allAreas)")
-    // MARK: Test Manager Pass
-//    let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
+//     let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
+//     let maintenance = passGenerator.createPass(forEntrant: HourlyEmployeeType.maintenance(contactInfo))
+//     print(cardReader.discountAccess(forPass: maintenance)) // prints list of available discounts
+//     print(cardReader.areaAccess(forPass: maintenance)) // prints all areas accessible to pass
+//     print(maintenance.contactDetails) // how to access contact details
+//     // test swipe feature
+//     print(cardReader.accessPass(maintenance, discountFor: .food(maintenance.foodDiscount)))
+//     print(cardReader.accessPass(maintenance, discountFor: .merchandise(maintenance.merchandiseDiscount)))
+//     print(cardReader.accessPass(maintenance, hasAccessTo: .kitchen))  // does have access
+//     print(cardReader.accessPass(maintenance, hasAccessTo: .office)) // doesn't have access
+//     print(cardReader.accessPass(maintenance, hasRideAccess: .allRides(maintenance.allRideAccess)))
+//     print(cardReader.accessPass(maintenance, hasRideAccess: .skipsQueues(maintenance.skipsQueues)))
+    
+      // MARK: Test Manager Pass
+//     let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
 //                "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
-//    let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
-//    let managerPass = passGenerator.createPass(forEntrant: ManagerType.manager(contactInfo))
-//    let discounts = "Manager gets a food discount of \(managerPass.foodDiscount)%, and a merchandise discount of \(managerPass.merchandiseDiscount)%"
-//    let hasAccess = "Manager pass has access to maintenance areas? \(managerPass.hasAccess(toArea: .maintenance))"
-//    let noAccess = "Manager pass has access to office areas? \(managerPass.hasAccess(toArea: .office))"
-//    let skipsQueues = "Manager pass can skip lines for rides? \(managerPass.skipsQueues)"
-//    let accessToRides = "Manager pass has access to all rides? \(managerPass.allRideAccess)"
-//    let info = "Manager pass contact info is \(managerPass.contactDetails)"
-//    let allAreas = "Manager access areas are \(managerPass.accessAreas)"
-//    print("\(discounts)\n\(hasAccess)\n\(noAccess)\n\(skipsQueues)\n\(accessToRides)\n\(allAreas)\n\(info)")
+//     let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
+//     let manager = passGenerator.createPass(forEntrant: ManagerType.manager(contactInfo))
+//     print(cardReader.discountAccess(forPass: manager)) // prints list of available discounts
+//     print(cardReader.areaAccess(forPass: manager)) // prints all areas accessible to pass
+//     print(manager.contactDetails) // how to access contact details
+//     // test swipe feature
+//     print(cardReader.accessPass(manager, discountFor: .food(manager.foodDiscount)))
+//     print(cardReader.accessPass(manager, discountFor: .merchandise(manager.merchandiseDiscount)))
+//     print(cardReader.accessPass(manager, hasAccessTo: .kitchen))  // does have access
+//     print(cardReader.accessPass(manager, hasAccessTo: .office)) // does have access
+//     print(cardReader.accessPass(manager, hasRideAccess: .allRides(manager.allRideAccess)))
+//     print(cardReader.accessPass(manager, hasRideAccess: .skipsQueues(manager.skipsQueues)))
+  }
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
   }
   
   override func didReceiveMemoryWarning() {

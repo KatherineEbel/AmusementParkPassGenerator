@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AudioToolbox
 
 final class AccessPassGenerator {
   // only way to create a access pass is the singleton passGenerator
@@ -21,6 +22,7 @@ final class AccessPassGenerator {
     fileprivate init(type: ParkEntrant) {
       self.type = type
     }
+    
   }
   
   // the only public access point to create passes

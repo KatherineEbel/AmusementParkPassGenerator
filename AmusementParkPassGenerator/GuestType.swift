@@ -14,9 +14,10 @@ private let vipMerchandiseDicount: Percent = 20
 enum GuestType: ParkEntrant, AgeVerifiable {
   case classic
   case VIP
-  case freeChild(birthdate: BirthDate)
+  case freeChild(birthdate: BirthDate) // child type is only Entrant with birthday currently associated
 }
 
+// ParkEntrant protocol extension has some default values for access areas
 extension GuestType {
   // returns a named tuple for each GuestType case (accessed by discounts.food, discounts.merchandise)
   var discounts: (food: Percent, merchandise: Percent) {

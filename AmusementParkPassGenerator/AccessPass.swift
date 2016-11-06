@@ -10,6 +10,7 @@ import Foundation
 
 
 // AccessPass struct is located in the AccessPassGenerator class
+// these are mostly convenience accessors to get to the Entrant type's properties
 extension AccessPassGenerator.AccessPass {
   // returns foodDiscount for instance of pass
   var foodDiscount: Percent {
@@ -59,14 +60,12 @@ extension AccessPassGenerator.AccessPass {
   // gets contact details for types that have it, or just
   // returns message that guest has no details
   var contactDetails: String {
-    if let _ = contactInfo {
-      if type is Contactable && type is HourlyEmployeeType {
-        let hourlyEmployee = type as! HourlyEmployeeType
-        return hourlyEmployee.contactDetails
-      } else if type is Contactable && type is ManagerType {
-        let manager = type as! ManagerType
-        return manager.contactDetails
-      }
+    if type is Contactable && type is HourlyEmployeeType {
+      let hourlyEmployee = type as! HourlyEmployeeType
+      return hourlyEmployee.contactDetails
+    } else if type is Contactable && type is ManagerType {
+      let manager = type as! ManagerType
+      return manager.contactDetails
     }
     return "Guest has no contact details"
   }

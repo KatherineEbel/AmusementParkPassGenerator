@@ -12,6 +12,7 @@ enum RideAccess {
 }
 
 extension RideAccess {
+  // used as a computed property for each entrant type
   var access: Bool {
     switch self {
       case .allRides(let success): return success

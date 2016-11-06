@@ -24,8 +24,10 @@
 		27F84F7E1DCBA9FE000B4D52 /* ContactInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F84F7D1DCBA9FE000B4D52 /* ContactInformation.swift */; };
 		27F84F841DCCF50B000B4D52 /* AccessPassGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F84F831DCCF50B000B4D52 /* AccessPassGenerator.swift */; };
 		27F84F881DCE5CAC000B4D52 /* AccessCardReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F84F871DCE5CAC000B4D52 /* AccessCardReader.swift */; };
-		27F84F8B1DCE5D04000B4D52 /* AudioFiles in Resources */ = {isa = PBXBuildFile; fileRef = 27F84F8A1DCE5D04000B4D52 /* AudioFiles */; };
 		27F84F8D1DCE5D4E000B4D52 /* CardReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F84F8C1DCE5D4E000B4D52 /* CardReader.swift */; };
+		44121D071DCFB47A00E439D5 /* AccessDenied.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44121D051DCFB47A00E439D5 /* AccessDenied.wav */; };
+		44121D081DCFB47A00E439D5 /* AccessGranted.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44121D061DCFB47A00E439D5 /* AccessGranted.wav */; };
+		44B73B6C1DCF4F84008113B5 /* AccessSoundCue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B73B6B1DCF4F84008113B5 /* AccessSoundCue.swift */; };
 		44F2A9341DCCD66100267F24 /* RideAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2A9331DCCD66100267F24 /* RideAccess.swift */; };
 		44F2A9361DCCD69000267F24 /* DiscountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2A9351DCCD69000267F24 /* DiscountType.swift */; };
 		44F2A9381DCCD6B100267F24 /* AccessArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2A9371DCCD6B100267F24 /* AccessArea.swift */; };
@@ -51,8 +53,10 @@
 		27F84F7D1DCBA9FE000B4D52 /* ContactInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInformation.swift; sourceTree = "<group>"; };
 		27F84F831DCCF50B000B4D52 /* AccessPassGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessPassGenerator.swift; sourceTree = "<group>"; };
 		27F84F871DCE5CAC000B4D52 /* AccessCardReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessCardReader.swift; sourceTree = "<group>"; };
-		27F84F8A1DCE5D04000B4D52 /* AudioFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AudioFiles; path = "../../../Library/Mobile Documents/com~apple~CloudDocs/iOS-Techdegree/AmusementParkMockups/AudioFiles"; sourceTree = "<group>"; };
 		27F84F8C1DCE5D4E000B4D52 /* CardReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardReader.swift; sourceTree = "<group>"; };
+		44121D051DCFB47A00E439D5 /* AccessDenied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AccessDenied.wav; sourceTree = "<group>"; };
+		44121D061DCFB47A00E439D5 /* AccessGranted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AccessGranted.wav; sourceTree = "<group>"; };
+		44B73B6B1DCF4F84008113B5 /* AccessSoundCue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessSoundCue.swift; sourceTree = "<group>"; };
 		44F2A9331DCCD66100267F24 /* RideAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideAccess.swift; sourceTree = "<group>"; };
 		44F2A9351DCCD69000267F24 /* DiscountType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountType.swift; sourceTree = "<group>"; };
 		44F2A9371DCCD6B100267F24 /* AccessArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessArea.swift; sourceTree = "<group>"; };
@@ -116,27 +120,28 @@
 		27F84F6E1DCB8E74000B4D52 /* ConcreteTypes */ = {
 			isa = PBXGroup;
 			children = (
-				27F84F871DCE5CAC000B4D52 /* AccessCardReader.swift */,
 				27F84F861DCD5201000B4D52 /* Helper/Error Types */,
 				44F2A9321DCCD64200267F24 /* Park Entitlements */,
 				44F2A9391DCCD70900267F24 /* Entrant Types */,
-				27F84F851DCD51CB000B4D52 /* PassGeneratorTypes */,
+				27F84F851DCD51CB000B4D52 /* PassTypes */,
 			);
 			name = ConcreteTypes;
 			sourceTree = "<group>";
 		};
-		27F84F851DCD51CB000B4D52 /* PassGeneratorTypes */ = {
+		27F84F851DCD51CB000B4D52 /* PassTypes */ = {
 			isa = PBXGroup;
 			children = (
+				27F84F871DCE5CAC000B4D52 /* AccessCardReader.swift */,
 				27F84F7B1DCBA781000B4D52 /* AccessPass.swift */,
 				27F84F831DCCF50B000B4D52 /* AccessPassGenerator.swift */,
 			);
-			name = PassGeneratorTypes;
+			name = PassTypes;
 			sourceTree = "<group>";
 		};
 		27F84F861DCD5201000B4D52 /* Helper/Error Types */ = {
 			isa = PBXGroup;
 			children = (
+				44B73B6B1DCF4F84008113B5 /* AccessSoundCue.swift */,
 				27F84F7D1DCBA9FE000B4D52 /* ContactInformation.swift */,
 				27F84F751DCB8F0D000B4D52 /* AccessPassError.swift */,
 			);
@@ -146,9 +151,18 @@
 		27F84F891DCE5CE7000B4D52 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				27F84F8A1DCE5D04000B4D52 /* AudioFiles */,
+				44121D041DCFB47A00E439D5 /* AudioFiles */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		44121D041DCFB47A00E439D5 /* AudioFiles */ = {
+			isa = PBXGroup;
+			children = (
+				44121D051DCFB47A00E439D5 /* AccessDenied.wav */,
+				44121D061DCFB47A00E439D5 /* AccessGranted.wav */,
+			);
+			path = AudioFiles;
 			sourceTree = "<group>";
 		};
 		44F2A9321DCCD64200267F24 /* Park Entitlements */ = {
@@ -232,9 +246,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				27F84F601DCB8D7D000B4D52 /* LaunchScreen.storyboard in Resources */,
+				44121D081DCFB47A00E439D5 /* AccessGranted.wav in Resources */,
 				27F84F5D1DCB8D7D000B4D52 /* Assets.xcassets in Resources */,
 				27F84F5B1DCB8D7D000B4D52 /* Main.storyboard in Resources */,
-				27F84F8B1DCE5D04000B4D52 /* AudioFiles in Resources */,
+				44121D071DCFB47A00E439D5 /* AccessDenied.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +277,7 @@
 				27F84F781DCB8F2C000B4D52 /* AgeVerifiable.swift in Sources */,
 				27F84F761DCB8F0D000B4D52 /* AccessPassError.swift in Sources */,
 				27F84F6C1DCB8E20000B4D52 /* Contactable.swift in Sources */,
+				44B73B6C1DCF4F84008113B5 /* AccessSoundCue.swift in Sources */,
 				44F2A9341DCCD66100267F24 /* RideAccess.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
