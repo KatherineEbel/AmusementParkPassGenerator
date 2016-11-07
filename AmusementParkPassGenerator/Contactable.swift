@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Employee and Manager types adopt this protocol
 protocol Contactable {
   var contactInformation: ContactInformation { get }
 }

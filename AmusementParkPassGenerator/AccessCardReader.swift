@@ -45,10 +45,8 @@ extension AccessCardReader {
     let foodDiscount = pass.foodDiscount
     let merchandiseDiscount = pass.merchandiseDiscount
     if foodDiscount == 0 && merchandiseDiscount == 0 {
-      playSound(false)
       return "This pass is not eligible for any discounts"
     } else {
-      playSound(true)
       return "This pass gets a food discount of \(foodDiscount)%, and a merchandise discount of \(merchandiseDiscount)%"
     }
   }
@@ -56,6 +54,7 @@ extension AccessCardReader {
   // MARK: Swipe Access
   // takes pass and an access area and returns true /plays sound if pass has access
   func accessPass(_ pass: PassType, hasAccessTo area: AccessArea) -> Bool {
+    displayBirthdayMessage(forPass: pass)
     let success = pass.hasAccess(toArea: area)
     playSound(success)
     return success
@@ -63,7 +62,7 @@ extension AccessCardReader {
   
   // swipe a pass for individual types of discounts plays appropriate sound
   func accessPass(_ pass: PassType, discountFor type: DiscountType) -> AccessMessage {
-    let _ = alertBirthday(forPass: pass)
+    displayBirthdayMessage(forPass: pass)
     var (discountType, discountAmount): (AccessMessage, AccessMessage)
     switch type {
       case .food(let foodDiscount): (discountType, discountAmount) =  ("Food", "\(foodDiscount)")
@@ -76,7 +75,7 @@ extension AccessCardReader {
   
   // swipe a pass for individual types of ride access -- plays appropriate sound
   func accessPass(_ pass: PassType, hasRideAccess type: RideAccess) -> AccessMessage {
-    let _ = alertBirthday(forPass: pass)
+    displayBirthdayMessage(forPass: pass)
     var (hasAccess, message): (Bool, AccessMessage)
     switch type {
       case .allRides(let success): (hasAccess, message) = (success, "to all rides")
@@ -100,12 +99,20 @@ extension AccessCardReader {
     
   }
   
+  // will only print a message if there is one to display
+  private func displayBirthdayMessage(forPass pass: PassType) {
+    let birthDayMessage = alertBirthday(forPass: pass)
+    if !birthDayMessage.isEmpty {
+      print(birthDayMessage)
+    }
+  }
+  
   // MARK: Helper methods
   // this formats the entrants birthday and current days date in the same way, and
   // strips the year off of both and compares the remaining strings. If they are 
   // equal, it is the entrant's birthday.
   // I currently only have birthdays attached to child passes.
-  func isBirthday(forPass pass: PassType, withDate date: BirthDate) -> Bool {
+  private func isBirthday(forPass pass: PassType, withDate date: BirthDate) -> Bool {
     let accessPass = pass as! AccessPassGenerator.AccessPass
     let formatter = accessPass.dateFormatter
     let todaysDate = formatter.string(from: Date())

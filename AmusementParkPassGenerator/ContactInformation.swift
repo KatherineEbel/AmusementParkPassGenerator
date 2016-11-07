@@ -17,7 +17,7 @@ struct ContactInformation {
   var zipCode: String
 }
 
-
+// will throw an error if provided dictionary doesn't have the correct values
 extension ContactInformation {
   init?(withDictionary info: [String: String]) {
     do {

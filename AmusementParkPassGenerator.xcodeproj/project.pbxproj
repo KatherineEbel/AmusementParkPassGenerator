@@ -92,6 +92,8 @@
 		27F84F541DCB8D7C000B4D52 /* AmusementParkPassGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				27F84F6D1DCB8E60000B4D52 /* Protocols */,
+				27F84F6E1DCB8E74000B4D52 /* ConcreteTypes */,
 				27F84F891DCE5CE7000B4D52 /* Resources */,
 				27F84F551DCB8D7D000B4D52 /* AppDelegate.swift */,
 				27F84F571DCB8D7D000B4D52 /* ViewController.swift */,
@@ -99,8 +101,6 @@
 				27F84F5C1DCB8D7D000B4D52 /* Assets.xcassets */,
 				27F84F5E1DCB8D7D000B4D52 /* LaunchScreen.storyboard */,
 				27F84F611DCB8D7D000B4D52 /* Info.plist */,
-				27F84F6D1DCB8E60000B4D52 /* Protocols */,
-				27F84F6E1DCB8E74000B4D52 /* ConcreteTypes */,
 			);
 			path = AmusementParkPassGenerator;
 			sourceTree = "<group>";
@@ -123,19 +123,19 @@
 				27F84F861DCD5201000B4D52 /* Helper/Error Types */,
 				44F2A9321DCCD64200267F24 /* Park Entitlements */,
 				44F2A9391DCCD70900267F24 /* Entrant Types */,
-				27F84F851DCD51CB000B4D52 /* PassTypes */,
+				27F84F851DCD51CB000B4D52 /* PassTypes/CardReader/Generator */,
 			);
 			name = ConcreteTypes;
 			sourceTree = "<group>";
 		};
-		27F84F851DCD51CB000B4D52 /* PassTypes */ = {
+		27F84F851DCD51CB000B4D52 /* PassTypes/CardReader/Generator */ = {
 			isa = PBXGroup;
 			children = (
 				27F84F871DCE5CAC000B4D52 /* AccessCardReader.swift */,
 				27F84F7B1DCBA781000B4D52 /* AccessPass.swift */,
 				27F84F831DCCF50B000B4D52 /* AccessPassGenerator.swift */,
 			);
-			name = PassTypes;
+			name = PassTypes/CardReader/Generator;
 			sourceTree = "<group>";
 		};
 		27F84F861DCD5201000B4D52 /* Helper/Error Types */ = {

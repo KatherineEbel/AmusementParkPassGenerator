@@ -8,6 +8,7 @@
 import AudioToolbox
 import Foundation
 
+// AccessCardReader.swift adopts this protocol
 typealias AccessMessage = String
 protocol CardReader {
   func areaAccess(forPass pass: PassType) -> AccessMessage

@@ -9,6 +9,7 @@
 import Foundation
 import AudioToolbox
 
+// used by the AccessCardReader to play sounds when accessCards are swiped
 enum AccessSoundCue: String {
   case accessDenied = "AccessDenied"
   case accessGranted = "AccessGranted"

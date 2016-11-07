@@ -8,6 +8,7 @@
 
 import Foundation
 
+// AccessPassGenerator.AccessPass adopts this protocol ** AccessPass.swift is the extension
 protocol PassType {
   var type: ParkEntrant { get }
   var foodDiscount: Percent { get }

@@ -9,7 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-  
   /**
      Use jump bar to go to marked areas to test each type
      For testing birth dates you can uncomment just the "Test validating Birthdates" section
@@ -66,14 +65,12 @@ class ViewController: UIViewController {
 //    print("Pass converted to: \(tooOldPass.type)")
     
     // MARK: Test Free Child Pass
-    
-//     let goodDateFormat = "2014-11-07" // change 11-07 to current date to test birthday swipe
-//    
-//     let childGuest = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: goodDateFormat))
+//     let birthDate = "2014-11-06"
+//     let childGuest = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: birthDate))
 //     print(cardReader.discountAccess(forPass: childGuest)) // prints list of available discounts
 //     print(cardReader.areaAccess(forPass: childGuest)) // prints all areas accessible to pass
 //     print(childGuest.contactDetails) // how to access contact details (classic guest won't have any)
-//     // test swipe feature
+//      test swipe feature
 //     print(cardReader.accessPass(childGuest, discountFor: .food(childGuest.foodDiscount)))
 //     print(cardReader.accessPass(childGuest, discountFor: .merchandise(childGuest.merchandiseDiscount)))
 //     print(cardReader.accessPass(childGuest, hasAccessTo: .amusement))  // does have access
