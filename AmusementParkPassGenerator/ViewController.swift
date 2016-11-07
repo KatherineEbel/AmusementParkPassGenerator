@@ -94,7 +94,7 @@ class ViewController: UIViewController {
 //     print(cardReader.discountAccess(forPass: childGuest)) // prints list of available discounts
 //     print(cardReader.areaAccess(forPass: childGuest)) // prints all areas accessible to pass
 //     print(childGuest.contactDetails) // how to access contact details (classic guest won't have any)
-//      test swipe feature
+//      // test swipe feature
 //     print(cardReader.swipeAccess(childGuest, discountFor: .food(childGuest.foodDiscount)))
 //     print(cardReader.swipeAccess(childGuest, discountFor: .merchandise(childGuest.merchandiseDiscount)))
 //     print(cardReader.swipeAccess(childGuest, hasAccessTo: .amusement))  // does have access
