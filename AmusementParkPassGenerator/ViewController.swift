@@ -25,6 +25,12 @@ class ViewController: UIViewController {
     
     // MARK: Card Reader
     let cardReader = AccessCardReader.cardReader
+    let guestPass = passGenerator.createPass(forEntrant: GuestType.classic)
+    print(guestPass.passID)
+    let vipPass = passGenerator.createPass(forEntrant: GuestType.VIP)
+    print(vipPass.passID)
+    let secondGuest = passGenerator.createPass(forEntrant: GuestType.classic)
+    print(secondGuest.passID)
     
      // MARK: Stubs for testing GuestTypes
     

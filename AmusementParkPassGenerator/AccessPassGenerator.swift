@@ -9,6 +9,8 @@
 import Foundation
 import AudioToolbox
 
+typealias PassID = Int
+
 final class AccessPassGenerator {
   // only way to create a access pass is the singleton passGenerator
   static let passGenerator = AccessPassGenerator()
@@ -17,10 +19,13 @@ final class AccessPassGenerator {
   // added AccessPass struct to Pass Generator, so initializer for Access Pass can only
   // be called by generator
   struct AccessPass: PassType, AgeVerifiable {
+    static var currentPassID: PassID = 1
     let type: ParkEntrant
     let maxChildAge: Double = 5
+    let passID: PassID = AccessPass.currentPassID
     fileprivate init(type: ParkEntrant) {
       self.type = type
+      AccessPass.currentPassID += 1
     }
     
   }
