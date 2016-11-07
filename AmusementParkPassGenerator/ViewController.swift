@@ -13,11 +13,11 @@ class ViewController: UIViewController {
      Use jump bar to go to marked areas to test each type
      For testing birth dates you can uncomment just the "Test validating Birthdates" section
      For testing Contact info just uncomment the "info for testing contact info section"
-     ** The passGenerator (line 21) needs to be uncommented for creating all pass types
-     ** The cardReader variable (line 24) needs to be uncommented also to read pass info
+     ** The passGenerator (line 24) needs to be uncommented for creating all pass types
+     ** The cardReader variable (line 27) needs to be uncommented also to read pass info
      ** (comment out individual swipe tests to hear sounds for one test)
    I created a button action, just uncomment the code you want to test and click the button
-   to run the code
+   to run the code.
   *///
   @IBAction func testAccess() {
     // MARK: Pass Generator
