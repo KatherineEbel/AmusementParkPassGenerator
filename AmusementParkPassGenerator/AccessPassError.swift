@@ -17,4 +17,5 @@ enum AccessPassError: Error {
   case InvalidDateFormat(message: String)
   case FailsChildAgeRequirement(message: String)
   case AccessSoundQueueError(message: String)
+  case DoubleSwipeError(message: String)
 }

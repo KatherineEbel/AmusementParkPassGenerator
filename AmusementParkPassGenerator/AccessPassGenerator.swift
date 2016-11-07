@@ -13,7 +13,7 @@ typealias PassID = Int
 
 final class AccessPassGenerator {
   // only way to create a access pass is the singleton passGenerator
-  static let passGenerator = AccessPassGenerator()
+  static let sharedPassGenerator = AccessPassGenerator()
   private init() { }
   
   // added AccessPass struct to Pass Generator, so initializer for Access Pass can only

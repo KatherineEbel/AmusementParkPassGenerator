@@ -21,16 +21,34 @@ class ViewController: UIViewController {
   *///
   @IBAction func testAccess() {
     // MARK: Pass Generator
-    let passGenerator = AccessPassGenerator.passGenerator // pass generator is responsible for creating all access passes and is a singleton
+    let passGenerator = AccessPassGenerator.sharedPassGenerator // pass generator is responsible for creating all access passes and is a singleton
     
     // MARK: Card Reader
-    let cardReader = AccessCardReader.cardReader
-    let guestPass = passGenerator.createPass(forEntrant: GuestType.classic)
-    print(guestPass.passID)
-    let vipPass = passGenerator.createPass(forEntrant: GuestType.VIP)
-    print(vipPass.passID)
-    let secondGuest = passGenerator.createPass(forEntrant: GuestType.classic)
-    print(secondGuest.passID)
+    var cardReader = AccessCardReader.sharedCardReader
+    
+    // MARK: Extra credit prevent double swipes
+    // each pass has a pass id the requirement said to check swipes for rides so  restriction is currently only
+    // on the ride access "swipe", but could be modified to use on other kinds of swipes also.
+    // when the pass is swiped, the id is recorded as the card reader's "lastCardId", along with a timeStamp, so card will not be
+    // permitted if it is swiped a second time in a row within the allowed amount of time (currently 10 seconds). 
+    
+//    let guestPass = passGenerator.createPass(forEntrant: GuestType.classic)
+//    // this first swipe will be accepted
+//    print(cardReader.swipeAccess(guestPass, hasRideAccess: .allRides(guestPass.allRideAccess)))
+//    
+//    // ******* change timeInterval for timer to anything above 10 and the swipe inside the closure should succeed. Will fail for
+//    // anything less than 10 seconds.
+//    
+//    let _ = Timer.scheduledTimer(withTimeInterval: cardReader.minimumTimeWait, repeats: false) { _ in // timer just to test the timeStamp feature... card reader tracks timeStamps
+//      print(cardReader.swipeAccess(guestPass, hasRideAccess: .allRides(guestPass.allRideAccess)))
+//    }
+    
+    // you can add next two lines inside closure, and this pass should be allowed regardless of the time in between
+    // swipes since passID is different
+    // MARK: Check different passID will be accepted before minimumTimeWait
+//    let vipGuest = passGenerator.createPass(forEntrant: GuestType.VIP)
+//    print(cardReader.swipeAccess(vipGuest, hasRideAccess: .allRides(vipGuest.allRideAccess)))
+    
     
      // MARK: Stubs for testing GuestTypes
     
@@ -41,12 +59,12 @@ class ViewController: UIViewController {
 //     print(cardReader.areaAccess(forPass: classicGuest)) // prints all areas accessible to pass
 //     print(classicGuest.contactDetails) // how to access contact details (classic guest won't have any)
      // test swipe feature
-//     print(cardReader.accessPass(classicGuest, discountFor: .food(classicGuest.foodDiscount)))
-//     print(cardReader.accessPass(classicGuest, discountFor: .merchandise(classicGuest.merchandiseDiscount)))
-//     print(cardReader.accessPass(classicGuest, hasAccessTo: .amusement))  // does have access
-//     print(cardReader.accessPass(classicGuest, hasAccessTo: .maintenance)) // doesn't have access
-//     print(cardReader.accessPass(classicGuest, hasRideAccess: .allRides(classicGuest.allRideAccess)))
-//     print(cardReader.accessPass(classicGuest, hasRideAccess: .skipsQueues(classicGuest.skipsQueues)))
+//     print(cardReader.swipeAccess(classicGuest, discountFor: .food(classicGuest.foodDiscount)))
+//     print(cardReader.swipeAccess(classicGuest, discountFor: .merchandise(classicGuest.merchandiseDiscount)))
+//     print(cardReader.swipeAccess(classicGuest, hasAccessTo: .amusement))  // does have access
+//     print(cardReader.swipeAccess(classicGuest, hasAccessTo: .maintenance)) // doesn't have access
+//     print(cardReader.swipeAccess(classicGuest, hasRideAccess: .allRides(classicGuest.allRideAccess)))
+//     print(cardReader.swipeAccess(classicGuest, hasRideAccess: .skipsQueues(classicGuest.skipsQueues)))
     
          // MARK: Test VIP Guest
     
@@ -55,12 +73,12 @@ class ViewController: UIViewController {
 //     print(cardReader.areaAccess(forPass: vipGuest)) // prints all areas accessible to pass
 //     print(vipGuest.contactDetails) // how to access contact details (classic guest won't have any)
 //     // test swipe feature
-//     print(cardReader.accessPass(vipGuest, discountFor: .food(vipGuest.foodDiscount)))
-//     print(cardReader.accessPass(vipGuest, discountFor: .merchandise(vipGuest.merchandiseDiscount)))
-//     print(cardReader.accessPass(vipGuest, hasAccessTo: .amusement))  // does have access
-//     print(cardReader.accessPass(vipGuest, hasAccessTo: .maintenance)) // doesn't have access
-//     print(cardReader.accessPass(vipGuest, hasRideAccess: .allRides(vipGuest.allRideAccess)))
-//     print(cardReader.accessPass(vipGuest, hasRideAccess: .skipsQueues(vipGuest.skipsQueues)))
+//     print(cardReader.swipeAccess(vipGuest, discountFor: .food(vipGuest.foodDiscount)))
+//     print(cardReader.swipeAccess(vipGuest, discountFor: .merchandise(vipGuest.merchandiseDiscount)))
+//     print(cardReader.swipeAccess(vipGuest, hasAccessTo: .amusement))  // does have access
+//     print(cardReader.swipeAccess(vipGuest, hasAccessTo: .maintenance)) // doesn't have access
+//     print(cardReader.swipeAccess(vipGuest, hasRideAccess: .allRides(vipGuest.allRideAccess)))
+//     print(cardReader.swipeAccess(vipGuest, hasRideAccess: .skipsQueues(vipGuest.skipsQueues)))
     
       // MARK: Test Validating BirthDates
     
@@ -77,12 +95,12 @@ class ViewController: UIViewController {
 //     print(cardReader.areaAccess(forPass: childGuest)) // prints all areas accessible to pass
 //     print(childGuest.contactDetails) // how to access contact details (classic guest won't have any)
 //      test swipe feature
-//     print(cardReader.accessPass(childGuest, discountFor: .food(childGuest.foodDiscount)))
-//     print(cardReader.accessPass(childGuest, discountFor: .merchandise(childGuest.merchandiseDiscount)))
-//     print(cardReader.accessPass(childGuest, hasAccessTo: .amusement))  // does have access
-//     print(cardReader.accessPass(childGuest, hasAccessTo: .maintenance)) // doesn't have access
-//     print(cardReader.accessPass(childGuest, hasRideAccess: .allRides(childGuest.allRideAccess)))
-//     print(cardReader.accessPass(childGuest, hasRideAccess: .skipsQueues(childGuest.skipsQueues)))
+//     print(cardReader.swipeAccess(childGuest, discountFor: .food(childGuest.foodDiscount)))
+//     print(cardReader.swipeAccess(childGuest, discountFor: .merchandise(childGuest.merchandiseDiscount)))
+//     print(cardReader.swipeAccess(childGuest, hasAccessTo: .amusement))  // does have access
+//     print(cardReader.swipeAccess(childGuest, hasAccessTo: .maintenance)) // doesn't have access
+//     print(cardReader.swipeAccess(childGuest, hasRideAccess: .allRides(childGuest.allRideAccess)))
+//     print(cardReader.swipeAccess(childGuest, hasRideAccess: .skipsQueues(childGuest.skipsQueues)))
     
      // MARK: Info for testing employee and manager contact information
     
@@ -112,15 +130,15 @@ class ViewController: UIViewController {
 //     print(cardReader.areaAccess(forPass: rideServices)) // prints all areas accessible to pass
 //     print(rideServices.contactDetails) // how to access contact details
 //     // test swipe feature
-//     print(cardReader.accessPass(rideServices, discountFor: .food(rideServices.foodDiscount)))
-//     print(cardReader.accessPass(rideServices, discountFor: .merchandise(rideServices.merchandiseDiscount)))
-//     print(cardReader.accessPass(rideServices, hasAccessTo: .rideControl))  // does have access
-//     print(cardReader.accessPass(rideServices, hasAccessTo: .maintenance)) // doesn't have access
-//     print(cardReader.accessPass(rideServices, hasRideAccess: .allRides(rideServices.allRideAccess)))
-//     print(cardReader.accessPass(rideServices, hasRideAccess: .skipsQueues(rideServices.skipsQueues)))
+//     print(cardReader.swipeAccess(rideServices, discountFor: .food(rideServices.foodDiscount)))
+//     print(cardReader.swipeAccess(rideServices, discountFor: .merchandise(rideServices.merchandiseDiscount)))
+//     print(cardReader.swipeAccess(rideServices, hasAccessTo: .rideControl))  // does have access
+//     print(cardReader.swipeAccess(rideServices, hasAccessTo: .maintenance)) // doesn't have access
+//     print(cardReader.swipeAccess(rideServices, hasRideAccess: .allRides(rideServices.allRideAccess)))
+//     print(cardReader.swipeAccess(rideServices, hasRideAccess: .skipsQueues(rideServices.skipsQueues)))
     
      // MARK: Test Food Services pass
-    
+//    
 //     let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
 //                "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
 //     let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
@@ -129,15 +147,15 @@ class ViewController: UIViewController {
 //     print(cardReader.areaAccess(forPass: foodService)) // prints all areas accessible to pass
 //     print(foodService.contactDetails) // how to access contact details
 //     // test swipe feature
-//     print(cardReader.accessPass(foodService, discountFor: .food(foodService.foodDiscount)))
-//     print(cardReader.accessPass(foodService, discountFor: .merchandise(foodService.merchandiseDiscount)))
-//     print(cardReader.accessPass(foodService, hasAccessTo: .kitchen))  // does have access
-//     print(cardReader.accessPass(foodService, hasAccessTo: .maintenance)) // doesn't have access
-//     print(cardReader.accessPass(foodService, hasRideAccess: .allRides(foodService.allRideAccess)))
-//     print(cardReader.accessPass(foodService, hasRideAccess: .skipsQueues(foodService.skipsQueues)))
+//     print(cardReader.swipeAccess(foodService, discountFor: .food(foodService.foodDiscount)))
+//     print(cardReader.swipeAccess(foodService, discountFor: .merchandise(foodService.merchandiseDiscount)))
+//     print(cardReader.swipeAccess(foodService, hasAccessTo: .kitchen))  // does have access
+//     print(cardReader.swipeAccess(foodService, hasAccessTo: .maintenance)) // doesn't have access
+//     print(cardReader.swipeAccess(foodService, hasRideAccess: .allRides(foodService.allRideAccess)))
+//     print(cardReader.swipeAccess(foodService, hasRideAccess: .skipsQueues(foodService.skipsQueues)))
     
     // MARK: Test Maintenance Pass
-    
+//    
 //     let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
 //                "city": "Somewhere Out there", "state": "FL", "zipCode": "90210"]
 //     let contactInfo = ContactInformation(withDictionary: correctInfo)! // force unwrapping since I know it contains correct values
@@ -146,12 +164,12 @@ class ViewController: UIViewController {
 //     print(cardReader.areaAccess(forPass: maintenance)) // prints all areas accessible to pass
 //     print(maintenance.contactDetails) // how to access contact details
 //     // test swipe feature
-//     print(cardReader.accessPass(maintenance, discountFor: .food(maintenance.foodDiscount)))
-//     print(cardReader.accessPass(maintenance, discountFor: .merchandise(maintenance.merchandiseDiscount)))
-//     print(cardReader.accessPass(maintenance, hasAccessTo: .kitchen))  // does have access
-//     print(cardReader.accessPass(maintenance, hasAccessTo: .office)) // doesn't have access
-//     print(cardReader.accessPass(maintenance, hasRideAccess: .allRides(maintenance.allRideAccess)))
-//     print(cardReader.accessPass(maintenance, hasRideAccess: .skipsQueues(maintenance.skipsQueues)))
+//     print(cardReader.swipeAccess(maintenance, discountFor: .food(maintenance.foodDiscount)))
+//     print(cardReader.swipeAccess(maintenance, discountFor: .merchandise(maintenance.merchandiseDiscount)))
+//     print(cardReader.swipeAccess(maintenance, hasAccessTo: .kitchen))  // does have access
+//     print(cardReader.swipeAccess(maintenance, hasAccessTo: .office)) // doesn't have access
+//     print(cardReader.swipeAccess(maintenance, hasRideAccess: .allRides(maintenance.allRideAccess)))
+//     print(cardReader.swipeAccess(maintenance, hasRideAccess: .skipsQueues(maintenance.skipsQueues)))
     
       // MARK: Test Manager Pass
 //     let correctInfo = ["firstName": "John", "lastName": "Doe", "streetAddress": "123 Wonder Road",
@@ -162,12 +180,12 @@ class ViewController: UIViewController {
 //     print(cardReader.areaAccess(forPass: manager)) // prints all areas accessible to pass
 //     print(manager.contactDetails) // how to access contact details
 //     // test swipe feature
-//     print(cardReader.accessPass(manager, discountFor: .food(manager.foodDiscount)))
-//     print(cardReader.accessPass(manager, discountFor: .merchandise(manager.merchandiseDiscount)))
-//     print(cardReader.accessPass(manager, hasAccessTo: .kitchen))  // does have access
-//     print(cardReader.accessPass(manager, hasAccessTo: .office)) // does have access
-//     print(cardReader.accessPass(manager, hasRideAccess: .allRides(manager.allRideAccess)))
-//     print(cardReader.accessPass(manager, hasRideAccess: .skipsQueues(manager.skipsQueues)))
+//     print(cardReader.swipeAccess(manager, discountFor: .food(manager.foodDiscount)))
+//     print(cardReader.swipeAccess(manager, discountFor: .merchandise(manager.merchandiseDiscount)))
+//     print(cardReader.swipeAccess(manager, hasAccessTo: .kitchen))  // does have access
+//     print(cardReader.swipeAccess(manager, hasAccessTo: .office)) // does have access
+//     print(cardReader.swipeAccess(manager, hasRideAccess: .allRides(manager.allRideAccess)))
+//     print(cardReader.swipeAccess(manager, hasRideAccess: .skipsQueues(manager.skipsQueues)))
   }
 
   override func viewDidLoad() {

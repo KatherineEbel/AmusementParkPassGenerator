@@ -8,8 +8,15 @@
 
 import AudioToolbox
 struct AccessCardReader: CardReader {
-  static let cardReader = AccessCardReader()
-  private init() {}
+  static let sharedCardReader = AccessCardReader()
+  var (lastPassID, lastTimeStamp): (passID:PassID?, timeStamp: TimeInterval?)
+  var minimumTimeWait: TimeInterval = 10
+  var timeStamp: TimeInterval {
+    return Date().timeIntervalSince1970
+  }
+  private init() {
+    lastPassID = nil
+  }
 }
 
 extension AccessCardReader {
@@ -53,7 +60,7 @@ extension AccessCardReader {
   
   // MARK: Swipe Access
   // takes pass and an access area and returns true /plays sound if pass has access
-  func accessPass(_ pass: PassType, hasAccessTo area: AccessArea) -> Bool {
+  func swipeAccess(_ pass: PassType, hasAccessTo area: AccessArea) -> Bool {
     displayBirthdayMessage(forPass: pass)
     let success = pass.hasAccess(toArea: area)
     playSound(success)
@@ -61,7 +68,7 @@ extension AccessCardReader {
   }
   
   // swipe a pass for individual types of discounts plays appropriate sound
-  func accessPass(_ pass: PassType, discountFor type: DiscountType) -> AccessMessage {
+  func swipeAccess(_ pass: PassType, discountFor type: DiscountType) -> AccessMessage {
     displayBirthdayMessage(forPass: pass)
     var (discountType, discountAmount): (AccessMessage, AccessMessage)
     switch type {
@@ -74,7 +81,14 @@ extension AccessCardReader {
   }
   
   // swipe a pass for individual types of ride access -- plays appropriate sound
-  func accessPass(_ pass: PassType, hasRideAccess type: RideAccess) -> AccessMessage {
+  mutating func swipeAccess(_ pass: PassType, hasRideAccess type: RideAccess) -> AccessMessage {
+    do {
+     let _ = try isValidSwipe(forID: pass.passID)
+    } catch AccessPassError.DoubleSwipeError(message: let message) {
+      return(message)
+    } catch let error {
+      return ("\(error)")
+    }
     displayBirthdayMessage(forPass: pass)
     var (hasAccess, message): (Bool, AccessMessage)
     switch type {
@@ -82,7 +96,23 @@ extension AccessCardReader {
       case .skipsQueues(let success): (hasAccess, message) = (success, "to skip lines for rides")
     }
     playSound(hasAccess)
+    (lastPassID, lastTimeStamp) = (pass.passID, timeStamp)
     return hasAccess ? "This pass has access \(message)" : "This pass doesn't have access \(message)"
+  }
+  
+  // displays error message if id matches lastUsedId and also used < 10 seconds ago
+  private func isValidSwipe(forID id: PassID) throws -> Bool {
+    let currentTime = timeStamp
+    if let lastUsedID = lastPassID, let lastStamp = lastTimeStamp {
+      if id == lastUsedID  {
+        guard currentTime - lastStamp > minimumTimeWait else {
+          playSound(currentTime - lastStamp > minimumTimeWait)
+          throw AccessPassError.DoubleSwipeError(message: "Swipe error. Check card ID. This card's id: \(id) was already swiped")
+        }
+        return true
+      }
+    }
+    return true
   }
   
   // pass will be checked every time it is swiped *** only child passes currently have associated birthdays
