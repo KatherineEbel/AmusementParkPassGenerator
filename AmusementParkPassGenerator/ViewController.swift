@@ -88,8 +88,8 @@ class ViewController: UIViewController {
 //    let tooOldPass = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: tooOld)) // should throw fails age requirement error (message printed to console) pass will default to classic pass
 //    print("Pass converted to: \(tooOldPass.type)")
     
-    // MARK: Test Free Child Pass
-//     let birthDate = "2014-11-06"
+    // MARK: Test Free Child Pass -- will trigger Happy Birthday
+//     let birthDate = "2014-11-07" // Make sure date is current month, day to test Birthday message
 //     let childGuest = passGenerator.createPass(forEntrant: GuestType.freeChild(birthdate: birthDate))
 //     print(cardReader.discountAccess(forPass: childGuest)) // prints list of available discounts
 //     print(cardReader.areaAccess(forPass: childGuest)) // prints all areas accessible to pass
