@@ -11,6 +11,7 @@ import Foundation
 // AccessPassGenerator.AccessPass adopts this protocol ** AccessPass.swift is the extension
 protocol PassType {
   var type: ParkEntrant { get }
+  var passID: PassID { get }
   var foodDiscount: Percent { get }
   var merchandiseDiscount: Percent { get }
   var allRideAccess: Bool { get }
